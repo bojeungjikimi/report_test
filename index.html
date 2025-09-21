@@ -1,0 +1,2515 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>보증지킴이 - 전세 사기 방지 서비스</title>
+    <link rel="stylesheet" href="css/index-styles.css">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+    <!-- 상단바 -->
+    <header class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="logo">
+                    <img src="images/logo.png" alt="보증지킴이" class="logo-img">
+                    <span class="logo-text">보증지킴이</span>
+                </div>
+                <div class="top-bar-actions">
+                    <button class="top-bar-btn" onclick="openModal()">
+                        바로 신청하기
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 1단계: 인지단계 - Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>🏠 전세사기 걱정 끝!<br>보증지킴이로 안전하게</h1>
+                
+                <!-- 말풍선 대화 섹션 -->
+                <div class="conversation-section">
+                    <div class="speech-bubble worry">
+                            <div class="speaker">😰 전세 계약자</div>
+                            <div class="message">"보증금 떼일까봐 무서워요..."</div>
+                    </div>
+                    
+                    <div class="speech-bubble solution">
+                            <div class="speaker">💡 친구</div>
+                            <div class="message">"보증지킴이로 미리 확인하세요!"</div>
+                    </div>
+                </div>
+                
+                
+                <!-- 사용자 흐름 기반 특징 -->
+                <div class="hero-features-simple">
+                    <div class="feature-simple">
+                        <div class="feature-step">1</div>
+                        <div class="feature-content">
+                            <span class="feature-icon">📝</span>
+                            <span class="feature-text">정보 입력</span>
+                            <span class="feature-desc">3분이면 완료</span>
+                        </div>
+                    </div>
+                    <div class="feature-simple">
+                        <div class="feature-step">2</div>
+                        <div class="feature-content">
+                            <span class="feature-icon">🔍</span>
+                            <span class="feature-text">꼼꼼한 검증</span>
+                            <span class="feature-desc">전문가 분석</span>
+                        </div>
+                    </div>
+                    <div class="feature-simple">
+                        <div class="feature-step">3</div>
+                        <div class="feature-content">
+                            <span class="feature-icon">📊</span>
+                            <span class="feature-text">결과 확인</span>
+                            <span class="feature-desc">안전한 계약</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="cta-button" id="hero-cta" onclick="scrollToSection('problem-solution')">
+                    지금 체크해보기!
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 1단계: 인지단계 - Problem Awareness Section -->
+    <section id="problem-solution" class="problem-solution">
+        <div class="container">
+            <h2 class="section-title">🤔 전세 계약 전 체크포인트</h2>
+            <p style="text-align: center; color: #718096; margin-bottom: 2rem; font-size: 1rem;">주요 위험 요소 미리 확인</p>
+            
+            <!-- 단계별 진행 표시 -->
+            <div class="problem-progress">
+                <div class="progress-step active" data-step="1">
+                    <div class="step-indicator">1</div>
+                    <div class="step-label">재정 상황</div>
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="2">
+                    <div class="step-indicator">2</div>
+                    <div class="step-label">법적 상태</div>
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="3">
+                    <div class="step-indicator">3</div>
+                    <div class="step-label">시세 적정성</div>
+                </div>
+            </div>
+            
+            <!-- 문제 카드 컨테이너 -->
+            <div class="problem-container">
+                <div class="problem-card active" data-card="1">
+                    <div class="card-header">
+                        <span class="card-icon">💸</span>
+                        <h3 class="card-title">집주인 재정 상황</h3>
+                    </div>
+                    <div class="card-badge">위험도 높음</div>
+                    <p class="card-description"><strong>보증금 회수 위험</strong><br>집주인의 부채나 압류 상황을 미리 확인하면 안전해요</p>
+                    <div class="card-example">
+                        <div class="example-title">⚠️ 실제 사례</div>
+                        <div class="example-text">"집주인이 수억원 빚으로 압류당한 상태에서 전세 계약을 받았습니다. 보증금 수천만원~수억원을 돌려받지 못한 피해 사례가 있습니다."</div>
+                    </div>
+                </div>
+                
+                <div class="problem-card" data-card="2">
+                    <div class="card-header">
+                        <span class="card-icon">🏗️</span>
+                        <h3 class="card-title">건물 법적 상태</h3>
+                    </div>
+                    <div class="card-badge">위험도 높음</div>
+                    <p class="card-description"><strong>불법 건축물 확인</strong><br>증축이나 용도 변경 이력이 있는지 체크가 필요해요</p>
+                    <div class="card-example">
+                        <div class="example-title">⚠️ 실제 사례</div>
+                        <div class="example-text">"2층 불법 증축으로 인해 철거 명령을 받은 건물에서 전세 계약을 했습니다. 갑작스러운 철거로 인한 피해가 발생했습니다."</div>
+                    </div>
+                </div>
+                
+                <div class="problem-card" data-card="3">
+                    <div class="card-header">
+                        <span class="card-icon">📈</span>
+                        <h3 class="card-title">시세 적정성</h3>
+                    </div>
+                    <div class="card-badge">위험도 중간</div>
+                    <p class="card-description"><strong>합리적인 가격인지</strong><br>주변 시세와 비교해서 적정한 가격인지 확인해보세요</p>
+                    <div class="card-example">
+                        <div class="example-title">⚠️ 실제 사례</div>
+                        <div class="example-text">"주변 시세 대비 수천만원~수억원 과다 계약으로 유도했습니다. 시세 차이만큼 손실이 발생한 피해 사례입니다."</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 네비게이션 버튼 -->
+            <div class="problem-navigation">
+                <button class="nav-button prev" onclick="changeProblemCard(-1)">
+                    <span>← 이전</span>
+                </button>
+                <div class="nav-dots">
+                    <span class="dot active" data-dot="1"></span>
+                    <span class="dot" data-dot="2"></span>
+                    <span class="dot" data-dot="3"></span>
+                </div>
+                <button class="nav-button next" onclick="changeProblemCard(1)">
+                    <span>다음 →</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2단계: 호기심단계 - How It Works Section -->
+    <section id="curiosity" class="features">
+        <div class="container">
+            <h2 class="section-title">🔍 3단계 체크 시스템</h2>
+            <p style="text-align: center; color: #718096; margin-bottom: 2rem; font-size: 0.9rem;">꼼꼼한 검증으로 빠른 확인</p>
+            
+            <!-- 단계별 안내 -->
+            <div class="scroll-indicator">
+                각 단계를 클릭하여 자세한 내용을 확인해보세요
+                </div>
+            
+            <!-- 단계별 체크 과정 -->
+            <div class="steps-container">
+                <div class="step-item" data-step="1">
+                    <div class="step-header" onclick="toggleStep(1)">
+                        <div class="step-number">1</div>
+                        <div class="step-title">💳 재정 위험 분석</div>
+                        <div class="step-toggle">+</div>
+                    </div>
+                    <div class="step-content">
+                        <div class="step-icon">🔍</div>
+                        <div class="step-description">
+                            <p>집주인의 부채, 압류 등 재정 위험 요소를 분석</p>
+                            
+                            <div class="analysis-items">
+                                <div class="analysis-grid">
+                                    <div class="analysis-item">부채 현황</div>
+                                    <div class="analysis-item">압류 등기</div>
+                                    <div class="analysis-item">신용도</div>
+                                    <div class="analysis-item">회수 가능성</div>
+                                </div>
+                            </div>
+                            
+                            <div class="check-points">
+                                <div class="check-grid">
+                                    <div class="check-item">부채 > 보증금</div>
+                                    <div class="check-item">압류 등기</div>
+                                    <div class="check-item">연체자 명단</div>
+                                    <div class="check-item">낮은 신용등급</div>
+                                </div>
+                            </div>
+                            
+                            <div class="step-example">
+                                <strong>예시:</strong> "집주인이 수억원 빚으로 압류당한 상태입니다."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step-item" data-step="2">
+                    <div class="step-header" onclick="toggleStep(2)">
+                        <div class="step-number">2</div>
+                        <div class="step-title">🏠 시세 분석</div>
+                        <div class="step-toggle">+</div>
+                    </div>
+                    <div class="step-content">
+                        <div class="step-icon">🏠</div>
+                        <div class="step-description">
+                            <p>국토교통부 실거래가와 주변 시세 비교 분석</p>
+                            
+                            <div class="analysis-items">
+                                <div class="analysis-grid">
+                                    <div class="analysis-item">실거래가</div>
+                                    <div class="analysis-item">주변 유사 매물</div>
+                                    <div class="analysis-item">층수/방향/면적</div>
+                                    <div class="analysis-item">과다/과소 계약</div>
+                                </div>
+                            </div>
+                            
+                            <div class="check-points">
+                                <div class="check-grid">
+                                    <div class="check-item">20% 이상</div>
+                                    <div class="check-item">급격한 상승</div>
+                                    <div class="check-item">큰 가격 차이</div>
+                                    <div class="check-item">시세 조작 의심</div>
+                                </div>
+                            </div>
+                            
+                            <div class="step-example">
+                                <strong>예시:</strong> "주변 시세 대비 수천만원 과다 계약 위험"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step-item" data-step="3">
+                    <div class="step-header" onclick="toggleStep(3)">
+                        <div class="step-number">3</div>
+                        <div class="step-title">🏗️ 법적 위험 분석</div>
+                        <div class="step-toggle">+</div>
+                    </div>
+                    <div class="step-content">
+                        <div class="step-icon">📋</div>
+                        <div class="step-description">
+                            <p>불법 건물, 용도 위반, 안전진단 등 법적 위험 요소 분석</p>
+                            
+                            <div class="analysis-items">
+                                <div class="analysis-grid">
+                                    <div class="analysis-item">등기사항 확인</div>
+                                    <div class="analysis-item">불법 증축/개조</div>
+                                    <div class="analysis-item">용도 위반</div>
+                                    <div class="analysis-item">안전진단 이력</div>
+                                </div>
+                            </div>
+                            
+                            <div class="check-points">
+                                <div class="check-grid">
+                                    <div class="check-item">철거 위험</div>
+                                    <div class="check-item">사용 제한</div>
+                                    <div class="check-item">안전진단 미실시</div>
+                                    <div class="check-item">무허가 건물</div>
+                                </div>
+                            </div>
+                            
+                            <div class="step-example">
+                                <strong>예시:</strong> "2층 불법 증축으로 철거 위험"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mockup-section">
+                <div class="mockup-image">
+                    <h3>
+                        종합 체크 리포트 📋
+                    </h3>
+                    <p>"이 집 진짜 괜찮을까?"에 대한 <strong>확실한 답</strong>을<br>전세사기 걱정 끝! 리포트로 <strong>바로</strong> 알려드려요! ✨</p>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- 2.5단계: 안전도 점수 시스템 - Safety Score Section -->
+    <section class="safety-score-section">
+        <div class="container">
+            <h2 class="section-title">📊 안전도 점수 시스템</h2>
+            <p class="section-subtitle">3단계 분석으로 정확한 점수 제공</p>
+            
+            <!-- 점수 시각화 -->
+            <div class="score-visualization">
+                <div class="score-circle">
+                    <div class="score-number">85</div>
+                    <div class="score-label">안전도 점수</div>
+                </div>
+                <div class="score-details">
+                    <div class="score-category">
+                        <div class="category-item">
+                            <div class="category-icon">💳</div>
+                            <div class="category-info">
+                                <div class="category-name">집주인 재정</div>
+                                <div class="category-score">90점</div>
+                            </div>
+                        </div>
+                        <div class="category-item">
+                            <div class="category-icon">🏠</div>
+                            <div class="category-info">
+                                <div class="category-name">시세 적정성</div>
+                                <div class="category-score">75점</div>
+                            </div>
+                        </div>
+                        <div class="category-item">
+                            <div class="category-icon">🏗️</div>
+                            <div class="category-info">
+                                <div class="category-name">건물 법적 상태</div>
+                                <div class="category-score">90점</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 점수 분석 -->
+            <div class="score-analysis">
+                <h3 class="analysis-title">📈 전체 점수대에서의 위치</h3>
+                <div class="score-range">
+                    <div class="range-bar">
+                        <div class="range-fill"></div>
+                        <div class="range-marker" style="left: 85%;"></div>
+                    </div>
+                    <div class="range-labels">
+                        <span>위험 (0-30)</span>
+                        <span>주의 (31-60)</span>
+                        <span>보통 (61-80)</span>
+                        <span>안전 (81-100)</span>
+                    </div>
+                </div>
+                <div class="score-status">
+                    <div class="status-badge safe">안전</div>
+                    <p class="status-desc">전체 계약 중 상위 15%에 해당하는 안전한 계약입니다</p>
+                </div>
+            </div>
+            
+            <!-- 리포트 미리보기 섹션 -->
+            <div class="report-preview-section">
+                <p class="preview-subtitle">상세한 분석 리포트를 미리 확인해보세요!</p>
+                
+                <!-- 리포트 미리보기 카드 -->
+                <div class="report-preview-card">
+                    <!-- 리포트 헤더 -->
+                    <div class="preview-header">
+                        <div class="preview-logo">
+                            <span class="logo-text">보증지킴이</span>
+                            </div>
+                        <div class="preview-date">25.??.??</div>
+                        </div>
+                    
+                    <!-- 고객 정보 -->
+                    <div class="preview-customer-info">
+                        <h4 class="preview-customer-title">??님을 위한 맞춤 리포트</h4>
+                        <p class="preview-customer-subtitle">안전한 전/월세 계약을 위한 전문 분석 결과입니다</p>
+                            </div>
+                    
+                    <!-- 분석 정보 테이블 -->
+                    <div class="preview-info-table">
+                        <div class="preview-table-header">분석한 집 정보</div>
+                        <table class="preview-table">
+                            <tbody>
+                                <tr>
+                                    <td class="preview-label">주소</td>
+                                    <td class="preview-value" colspan="3">??시 ??구 ??동 ??-??</td>
+                                </tr>
+                                <tr>
+                                    <td class="preview-label">보증금 유형</td>
+                                    <td class="preview-value">??</td>
+                                    <td class="preview-label">상세유형</td>
+                                    <td class="preview-value">??</td>
+                                </tr>
+                                <tr>
+                                    <td class="preview-label">보증금</td>
+                                    <td class="preview-value">??억원</td>
+                                    <td class="preview-label">월세</td>
+                                    <td class="preview-value">??</td>
+                                </tr>
+                                <tr>
+                                    <td class="preview-label">상황</td>
+                                    <td class="preview-value" colspan="3">??</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    
+                    <!-- 종합 점수 -->
+                    <div class="preview-score-section">
+                        <h4 class="preview-score-title">종합 안전성 분석</h4>
+                        <div class="preview-score-circle">
+                            <div class="preview-score-number">??</div>
+                            <div class="preview-score-label">종합점수</div>
+                            </div>
+                        <div class="preview-score-status">
+                            <span class="preview-status-badge">??</span>
+                            <p class="preview-status-desc">전반적으로 ??한 거래 가능</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 세부 분석 -->
+                    <div class="preview-analysis-grid">
+                        <div class="preview-analysis-item">
+                            <div class="preview-analysis-icon">⚖️</div>
+                            <div class="preview-analysis-category">법적 안전성</div>
+                            <div class="preview-analysis-score">??점</div>
+                        </div>
+                        <div class="preview-analysis-item">
+                            <div class="preview-analysis-icon">💰</div>
+                            <div class="preview-analysis-category">금융 안전성</div>
+                            <div class="preview-analysis-score">??점</div>
+                        </div>
+                    </div>
+                
+                    <!-- 안전 진단 결과 -->
+                    <div class="preview-safety-section">
+                        <h4 class="preview-safety-title">꼼꼼하게 확인했어요!</h4>
+                        <p class="preview-safety-subtitle">문제없음 - 안전한 거래 가능</p>
+                        
+                        <div class="preview-status-cards">
+                            <div class="preview-status-card">
+                                <div class="preview-status-icon">📋</div>
+                                <div class="preview-status-info">
+                                    <h5 class="preview-status-title">등기부등본</h5>
+                                    <p class="preview-status-desc">소유권 및 권리 관계 확인</p>
+                            </div>
+                        </div>
+                            <div class="preview-status-card">
+                                <div class="preview-status-icon">🏠</div>
+                                <div class="preview-status-info">
+                                    <h5 class="preview-status-title">건축물대장</h5>
+                                    <p class="preview-status-desc">건물 상태 및 용도 확인</p>
+                            </div>
+                            </div>
+                            <div class="preview-status-card">
+                                <div class="preview-status-icon">🌍</div>
+                                <div class="preview-status-info">
+                                    <h5 class="preview-status-title">토지대장</h5>
+                                    <p class="preview-status-desc">토지 상태 및 면적 확인</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+                    <!-- 보험 & 대출 정보 -->
+                    <div class="preview-insurance-section">
+                        <h4 class="preview-insurance-title">🛡️ 임대차보증금 반환보증보험</h4>
+                        <div class="preview-insurance-grid">
+                            <div class="preview-insurance-item">
+                                <span class="preview-insurance-label">가입 가능 여부</span>
+                                <span class="preview-insurance-value success">가입 가능</span>
+                        </div>
+                            <div class="preview-insurance-item">
+                                <span class="preview-insurance-label">월 보험료</span>
+                                <span class="preview-insurance-value">??만원</span>
+                    </div>
+                            <div class="preview-insurance-item">
+                                <span class="preview-insurance-label">보장 한도</span>
+                                <span class="preview-insurance-value">최대 ??억원</span>
+                        </div>
+                            <div class="preview-insurance-item">
+                                <span class="preview-insurance-label">추천 보험사</span>
+                                <span class="preview-insurance-value">??손해보험, ??해상</span>
+                    </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 경매 분석 섹션 -->
+                    <div class="preview-auction-section">
+                        <h4 class="preview-auction-title">⚖️ 경매 위험 분석</h4>
+                        <div class="preview-auction-grid">
+                            <div class="preview-auction-item">
+                                <div class="preview-auction-content">
+                                    <div class="preview-auction-label">손실 확률</div>
+                                    <div class="preview-auction-value danger">??%</div>
+                                </div>
+                            </div>
+                            <div class="preview-auction-item">
+                                <div class="preview-auction-content">
+                                    <div class="preview-auction-label">예상 손실액</div>
+                                    <div class="preview-auction-value">??억원</div>
+                                </div>
+                            </div>
+                            <div class="preview-auction-item">
+                                <div class="preview-auction-content">
+                                    <div class="preview-auction-label">경매 가능성</div>
+                                    <div class="preview-auction-value warning">??%</div>
+                                </div>
+                            </div>
+                            <div class="preview-auction-item">
+                                <div class="preview-auction-content">
+                                    <div class="preview-auction-label">예상 기간</div>
+                                    <div class="preview-auction-value">??개월</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 위험 요소 분석 -->
+                    <div class="preview-risk-section">
+                        <h4 class="preview-risk-title">⚠️ 주요 위험 요소</h4>
+                        <div class="preview-risk-list">
+                            <div class="preview-risk-item">
+                                <div class="preview-risk-icon">💸</div>
+                                <div class="preview-risk-content">
+                                    <div class="preview-risk-name">집주인 부채</div>
+                                    <div class="preview-risk-desc">??억원 (보증금 대비 ??%)</div>
+                                </div>
+                                <div class="preview-risk-status safe">안전</div>
+                            </div>
+                            <div class="preview-risk-item">
+                                <div class="preview-risk-icon">🏗️</div>
+                                <div class="preview-risk-content">
+                                    <div class="preview-risk-name">건물 상태</div>
+                                    <div class="preview-risk-desc">불법 증축 ??개소 발견</div>
+                                </div>
+                                <div class="preview-risk-status warning">주의</div>
+                            </div>
+                            <div class="preview-risk-item">
+                                <div class="preview-risk-icon">📈</div>
+                                <div class="preview-risk-content">
+                                    <div class="preview-risk-name">시세 적정성</div>
+                                    <div class="preview-risk-desc">주변 시세 대비 ??% 높음</div>
+                                </div>
+                                <div class="preview-risk-status danger">위험</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 최종 권고사항 -->
+                    <div class="preview-recommendation-section">
+                        <h4 class="preview-recommendation-title">💡 최종 권고사항</h4>
+                        <div class="preview-recommendation-content">
+                            <div class="preview-recommendation-item">
+                                <div class="preview-recommendation-icon">✅</div>
+                                <div class="preview-recommendation-text">보증보험 가입 필수 권장</div>
+                            </div>
+                            <div class="preview-recommendation-item">
+                                <div class="preview-recommendation-icon">⚠️</div>
+                                <div class="preview-recommendation-text">시세 재검토 후 계약 권장</div>
+                            </div>
+                            <div class="preview-recommendation-item">
+                                <div class="preview-recommendation-icon">📋</div>
+                                <div class="preview-recommendation-text">등기부등본 정기 확인 필요</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 리포트 푸터 -->
+                    <div class="preview-footer">
+                        <div class="preview-footer-logo">보증지킴이</div>
+                        <div class="preview-footer-info">
+                            안전한 부동산 거래를 위한 전문 서비스<br>
+                            이메일: bojangjikimi@gmail.com
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 미리보기 안내 -->
+                <div class="preview-notice">
+                    <p>💡 <strong>실제 리포트는</strong> 위와 같은 형태로 상세한 분석 결과와 함께 제공됩니다.</p>
+                    <p>📧 <strong>이메일로 발송</strong>되며, 언제든지 다시 확인하실 수 있습니다.</p>
+                </div>
+                
+                <!-- 바로 신청하기 버튼 -->
+                <div class="preview-cta">
+                    <button class="cta-button" onclick="scrollToSection('purchase')">
+                        바로 신청하기! 🚀
+                    </button>
+                    <p class="preview-cta-subtitle">지금 바로 안전성 검증을 신청하세요</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3단계: 신뢰단계 - Trust Section -->
+    <section id="trust" class="trust-section">
+        <div class="container">
+            <h2 class="section-title">🏆 신뢰받는 서비스</h2>
+            <p style="color: #718096; margin-bottom: 2rem;">안전하고 신뢰할 수 있는 서비스</p>
+            
+            <!-- 신뢰 배지 -->
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <div class="badge-icon">🔒</div>
+                    <div class="badge-content">
+                        <div class="badge-title">개인정보 보호</div>
+                        <div class="badge-desc">SSL 암호화로 안전하게</div>
+                    </div>
+                </div>
+                <div class="trust-badge">
+                    <div class="badge-icon">📊</div>
+                    <div class="badge-content">
+                        <div class="badge-title">전문가 분석</div>
+                        <div class="badge-desc">부동산 전문가 검증</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 실제 검증 사례 -->
+            <div class="verification-cases">
+                <h3 class="cases-title">🚨 실제 발견된 위험 사례들</h3>
+                <p class="cases-subtitle">이런 위험들이 미리 발견되지 않았다면...</p>
+                
+                <!-- 순차적 카드 컨테이너 -->
+                <div class="cases-sequential">
+                    <div class="case-item critical case-1" data-delay="0">
+                        <div class="case-icon">💸</div>
+                        <div class="case-content">
+                            <div class="case-title">집주인 수억원 부채 발견</div>
+                            <div class="case-desc">등기부등본에서 수억원 부채와 압류 등기 확인<br><strong>보증금 수천만원~수억원 위험!</strong></div>
+                            <div class="case-location">📍 강남구 아파트</div>
+                        </div>
+                    </div>
+                    <div class="case-item critical case-2" data-delay="500">
+                        <div class="case-icon">🏠</div>
+                        <div class="case-content">
+                            <div class="case-title">시세 30% 과다 부풀리기</div>
+                            <div class="case-desc">실거래가 대비 수천만원~수억원 과다 계약 시도<br><strong>시세 차이만큼 손실 위험!</strong></div>
+                            <div class="case-location">📍 서초구 오피스텔</div>
+                        </div>
+                    </div>
+                    <div class="case-item critical case-3" data-delay="1000">
+                        <div class="case-icon">🏗️</div>
+                        <div class="case-content">
+                            <div class="case-title">불법 증축 건물</div>
+                            <div class="case-desc">허가받지 않은 2층 증축으로 철거 위험<br><strong>전세 계약 무효 위험!</strong></div>
+                            <div class="case-location">📍 마포구 단독주택</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 경고 메시지 (마지막에 나타남) -->
+                <div class="cases-warning case-warning" data-delay="1500">
+                    <p>⚠️ <strong>이런 위험들을 미리 발견하지 못했다면 <br> 수백만원부터 수억원까지 소중한 보증금을 잃을 수 있습니다.</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 3단계: 신뢰단계 - Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">💬 고객 후기</h2>
+            <div class="testimonials-scroll">
+                <div class="testimonials-track">
+                <div class="testimonial-card">
+                        <div class="stars">
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                        </div>
+                        <p class="testimonial-text">"집주인 빚 문제를 미리 알 수 있어서 피해를 예방했어요!"</p>
+                        <div class="testimonial-author">김○○님</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                        </div>
+                        <p class="testimonial-text">"불법 건물 위험을 정확히 파악해서 안전하게 계약했어요."</p>
+                        <div class="testimonial-author">이○○님</div>
+                </div>
+                <div class="testimonial-card">
+                        <div class="stars">
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                        </div>
+                        <p class="testimonial-text">"시세 조작을 미리 발견하고 확신을 가지고 계약했어요."</p>
+                        <div class="testimonial-author">박○○님</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                        </div>
+                        <p class="testimonial-text">"빠른 시간 내에 명확한 답을 받아서 정말 도움이 됐어요."</p>
+                        <div class="testimonial-author">최○○님</div>
+                </div>
+                <div class="testimonial-card">
+                        <div class="stars">
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                        </div>
+                        <p class="testimonial-text">"전세사기 걱정 없이 안전하게 계약할 수 있었어요."</p>
+                        <div class="testimonial-author">정○○님</div>
+                    </div>
+                    <!-- 반복을 위한 복사본 -->
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                        </div>
+                        <p class="testimonial-text">"집주인 빚 문제를 미리 알 수 있어서 피해를 예방했어요!"</p>
+                        <div class="testimonial-author">김○○님</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                        </div>
+                        <p class="testimonial-text">"불법 건물 위험을 정확히 파악해서 안전하게 계약했어요."</p>
+                        <div class="testimonial-author">이○○님</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                        </div>
+                        <p class="testimonial-text">"시세 조작을 미리 발견하고 확신을 가지고 계약했어요."</p>
+                        <div class="testimonial-author">박○○님</div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- FAQ 섹션 -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">💬 자주 묻는 질문</h2>
+            <p style="text-align: center; color: #718096; margin-bottom: 2rem; font-size: 1rem;">궁금한 점들을 미리 확인해보세요</p>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="faq-icon">❓</span>
+                        <span class="faq-text">6,900원으로 보증금을 지킬 수 있나요?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>네, 가능합니다! 전세사기 피해는 수백만원부터 수억원까지 다양한데, 미리 검증해서 위험한 매물을 피하면 그 피해를 예방할 수 있어요. 5,900원으로 소중한 보증금을 지키는 것이죠.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="faq-icon">⏰</span>
+                        <span class="faq-text">검증 결과는 언제 받나요?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>신청 후 24시간 이내에 결과를 이메일로 발송해드립니다. 급한 경우에는 더 빠르게 처리해드릴 수 있어요.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="faq-icon">🔒</span>
+                        <span class="faq-text">개인정보는 안전한가요?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>네, 개인정보는 암호화되어 안전하게 처리됩니다. 검증 목적으로만 사용되며, 다른 용도로는 절대 사용하지 않아요.</p>
+                    </div>
+                </div>
+                
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="faq-icon">🏠</span>
+                        <span class="faq-text">모든 부동산 검증 가능한가요?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>아파트, 오피스텔, 빌라, 단독주택 등 대부분의 부동산을 검증할 수 있습니다. 다만 일부 특수한 경우는 사전 문의해주세요.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="faq-icon">📞</span>
+                        <span class="faq-text">추가 상담이 가능한가요?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>네, 분석 결과에 대해 1:1 상담이 가능합니다. 궁금한 점이 있으시면 언제든 문의해주세요.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4단계: 욕구단계 - Urgency Section -->
+    <section class="urgency-section">
+        <div class="container">
+            <h2 class="section-title">⏰ 지금 확인하세요</h2>
+            
+            <!-- 인터랙티브 카운터 -->
+            <div class="urgency-counter">
+                <div class="counter-item">
+                    <div class="counter-number" data-target="412">0</div>
+                    <div class="counter-label">올해 전세사기 피해 건수</div>
+                    </div>
+                <div class="counter-item">
+                    <div class="counter-number" data-target="3.2">0</div>
+                    <div class="counter-label">평균 피해 금액</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-number" data-target="42">0</div>
+                    <div class="counter-label">미리 검증으로 예방한 사례</div>
+                </div>
+                </div>
+            
+            <!-- 사용자 걱정 상황 말풍선 -->
+            <div class="scenario-container">
+                <h3 class="scenario-title">💭 이런 걱정들, 혹시 있으시죠?</h3>
+                <div class="worry-bubbles">
+                    <div class="worry-bubble" data-scenario="1">
+                        <div class="bubble-content">
+                            <div class="user-avatar">😰</div>
+                            <div class="bubble-text">"집주인이 갑자기 연락이 안 돼요... <br> 혹시 사기일까요?"</div>
+            </div>
+                        <div class="bubble-tail"></div>
+                    </div>
+                    
+                    <div class="worry-bubble" data-scenario="2">
+                        <div class="bubble-content">
+                            <div class="user-avatar">🤔</div>
+                            <div class="bubble-text">"시세보다 훨씬 싸게 나왔는데... <br> 뭔가 이상해요"</div>
+                        </div>
+                        <div class="bubble-tail"></div>
+                    </div>
+                    
+                    <div class="worry-bubble" data-scenario="3">
+                        <div class="bubble-content">
+                            <div class="user-avatar">😅</div>
+                            <div class="bubble-text">"계약서에 이상한 조항이 있어요... <br> 이게 정상인가요?"</div>
+                        </div>
+                        <div class="bubble-tail"></div>
+                    </div>
+                </div>
+                
+                <div class="solution-bubble">
+                    <div class="bubble-content">
+                        <div class="solution-avatar">💬</div>
+                        <div class="bubble-text">"걱정 마세요! 보증지킴이가 미리 위험성을 분석해드릴게요! ✨"</div>
+                    </div>
+                    <div class="bubble-tail solution-tail"></div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- 5단계: 구매단계 - 통합된 Pricing & Purchase Section -->
+    <section id="purchase" class="pricing">
+        <div class="container">
+            
+            <!-- 최종 CTA -->
+            <div class="final-cta-content">
+                <h3 class="final-cta-title">"이 집 진짜 괜찮을까?"<br>전세사기 걱정 끝! ✨</h3>
+                <p class="final-cta-desc">보증지킴이와 함께 안전한 계약 시작해요!</p>
+                
+                
+            <button class="cta-button" onclick="openModal()">
+                지금 체크해보기!
+            </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Multi-Step Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="multistep-modal">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button class="modal-back-btn" onclick="goToPreviousStep()" id="backBtn" style="display: none;">←</button>
+                <div class="modal-title" id="modalTitle">거래 유형 선택</div>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            
+            <!-- Progress Indicator -->
+            <div class="progress-indicator">
+                <div class="progress-dot" data-step="1"></div>
+                <div class="progress-dot" data-step="2"></div>
+                <div class="progress-dot" data-step="3"></div>
+                <div class="progress-dot" data-step="4"></div>
+                <div class="progress-dot" data-step="5"></div>
+                <div class="progress-dot" data-step="6"></div>
+                <div class="progress-dot" data-step="7"></div>
+            </div>
+                
+            <!-- Modal Content -->
+            <div class="modal-content">
+                <!-- Step 1: 거래 유형 선택 -->
+                <div class="step-content active" data-step="1">
+                    <div class="step-question">어떤 유형의 계약을 준비하고 계신가요?</div>
+                    <div class="option-buttons">
+                        <button class="option-btn" data-value="월세" data-traffic="1">
+                            월세
+                        </button>
+                        <button class="option-btn" data-value="전세" data-traffic="2">
+                            전세
+                        </button>
+                        <button class="option-btn" data-value="반전세" data-traffic="3">
+                            반전세
+                        </button>
+                        <button class="option-btn" data-value="매매" data-traffic="4">
+                            매매
+                        </button>
+                    </div>
+                    <!-- Navigation -->
+                    <div class="modal-navigation">
+                        <button class="nav-btn prev" onclick="goToPreviousStep()" id="prevBtn" disabled>이전</button>
+                        <button class="nav-btn next" onclick="goToNextStep()" id="nextBtn">보고서 신청하기</button>
+                    </div>
+                </div>
+                
+                <!-- Step 2: 거주 상태 선택 -->
+                <div class="step-content" data-step="2">
+                    <div class="step-question">어떤 상황에서 리포트가 필요하신가요?</div>
+                    <div class="option-buttons">
+                        <button class="option-btn" data-value="계약예정">
+                            계약 예정의 집이예요
+                        </button>
+                        <button class="option-btn" data-value="계약완료">
+                            계약은 했는데 아직 이사 전이예요
+                        </button>
+                        <button class="option-btn" data-value="현재거주">
+                            지금 살고 있는 집이예요
+                        </button>
+                        <button class="option-btn" data-value="둘러보기">
+                            그냥 둘러보고 있어요
+                        </button>
+                    </div>
+                    <!-- Navigation -->
+                    <div class="modal-navigation">
+                        <button class="nav-btn prev" onclick="goToPreviousStep()" id="prevBtn">이전</button>
+                        <button class="nav-btn next" onclick="goToNextStep()" id="nextBtn">다음</button>
+                    </div>
+                </div>
+                
+                <!-- Step 2-2: 현재 상태 상세 선택 -->
+                <div class="step-content" data-step="2-2">
+                    <div class="step-question">현재 상황을 더 자세히 알려주세요</div>
+                    <div class="option-buttons">
+                        <button class="option-btn" data-value="주소미정">
+                            계약할 집의 주소가 안 정해졌어요
+                        </button>
+                        <button class="option-btn" data-value="집선택중">
+                            계약하고 싶은 집이 있어요
+                        </button>
+                        <button class="option-btn" data-value="가계약금">
+                            가계약금만 지급한 상황이예요
+                        </button>
+                    </div>
+                    <!-- Navigation -->
+                    <div class="modal-navigation">
+                        <button class="nav-btn prev" onclick="goToPreviousStep()" id="prevBtn">이전</button>
+                        <button class="nav-btn next" onclick="goToNextStep()" id="nextBtn">다음</button>
+                    </div>
+                </div>
+                
+                <!-- Step 3: 금액 입력 -->
+                <div class="step-content" data-step="3">
+                    <div class="step-question" id="amountQuestion">보증금은 얼마인가요?</div>
+                    <div class="amount-input-section">
+                        <div class="amount-quick-buttons">
+                            <button class="amount-quick-btn" onclick="addAmount(100000000)">+1억원</button>
+                            <button class="amount-quick-btn" onclick="addAmount(10000000)">+1천만원</button>
+                            <button class="amount-quick-btn" onclick="addAmount(1000000)">+1백만원</button>
+                        </div>
+                        <input type="text" class="amount-input" id="amountInput" placeholder="금액을 입력하세요" oninput="formatAmount(this)">
+                        <div class="amount-text" id="amountText" style="display: none;"></div>
+                </div>
+                
+                    <!-- 월세 금액 입력 (월세/반전세 선택 시에만 표시) -->
+                    <div class="monthly-rent-section" id="monthlyRentSection" style="display: none;">
+                        <div class="step-question" style="margin-top: 2rem;">월세는 얼마인가요?</div>
+                        <div class="amount-input-section">
+                            <div class="amount-quick-buttons">
+                                <button class="amount-quick-btn" onclick="addMonthlyAmount(100000)">+10만원</button>
+                                <button class="amount-quick-btn" onclick="addMonthlyAmount(50000)">+5만원</button>
+                                <button class="amount-quick-btn" onclick="addMonthlyAmount(10000)">+1만원</button>
+                            </div>
+                            <input type="text" class="amount-input" id="monthlyAmountInput" placeholder="월세 금액을 입력하세요" oninput="formatMonthlyAmount(this)">
+                            <div class="amount-text" id="monthlyAmountText" style="display: none;"></div>
+                        </div>
+                    </div>
+                    <!-- Navigation -->
+                    <div class="modal-navigation">
+                        <button class="nav-btn prev" onclick="goToPreviousStep()" id="prevBtn">이전</button>
+                        <button class="nav-btn next" onclick="goToNextStep()" id="nextBtn">다음</button>
+                    </div>
+                </div>
+                
+                <!-- Step 4: 계약 기간 선택 -->
+                <div class="step-content" data-step="4">
+                    <div class="step-question">계약기간은 얼마나 되시나요?</div>
+                    <div class="option-buttons">
+                        <button class="option-btn" data-value="6개월">
+                            6개월
+                        </button>
+                        <button class="option-btn" data-value="12개월">
+                            12개월
+                        </button>
+                        <button class="option-btn" data-value="24개월">
+                            24개월
+                        </button>
+                        <button class="option-btn" data-value="기타">
+                            그 외
+                        </button>
+                    </div>
+                    <!-- Navigation -->
+                    <div class="modal-navigation">
+                        <button class="nav-btn prev" onclick="goToPreviousStep()" id="prevBtn">이전</button>
+                        <button class="nav-btn next" onclick="goToNextStep()" id="nextBtn">다음</button>
+                    </div>
+                </div>
+                
+                <!-- Step 5: 주소 입력 -->
+                <div class="step-content" data-step="5">
+                    <div class="step-question">분석받을 주소를 알려주세요</div>
+                    <div class="address-input-section" style="margin: 0 auto 1rem auto; max-width: 300px; width: 100%;">
+                        <div class="address-field">
+                            <label class="address-label">시/도, 구/군</label>
+                            <input type="text" class="address-input-small" id="addressCityDistrict" placeholder="예: 서울시 강남구" oninput="updateFraudStats()">
+                        </div>
+                        <div class="address-field">
+                            <label class="address-label">동/읍/면</label>
+                            <input type="text" class="address-input-small" id="addressDong" placeholder="예: 역삼동">
+                        </div>
+                        <div class="address-field">
+                            <label class="address-label">지번 또는 도로명</label>
+                            <input type="text" class="address-input-small" id="addressNumber" placeholder="예: 123-45 또는 테헤란로 123">
+                        </div>
+                        <div class="address-field">
+                            <label class="address-label">상세주소</label>
+                            <input type="text" class="address-input-small" id="addressDetail" placeholder="예: 101호, 2층">
+                        </div>
+                    </div>
+                    <!-- Navigation -->
+                    <div class="modal-navigation">
+                        <button class="nav-btn prev" onclick="goToPreviousStep()" id="prevBtn">이전</button>
+                        <button class="nav-btn next" onclick="goToNextStep()" id="nextBtn">다음</button>
+                    </div>
+                </div>
+                
+                <!-- Step 6: 본인 정보 입력 -->
+                <div class="step-content" data-step="6">
+                    <div class="step-question">리포트를 받을 연락처를 알려주세요</div>
+                    <div class="personal-info-section" style="margin: 0 auto 1rem auto; max-width: 300px; width: 100%;">
+                        <div class="address-field">
+                            <label class="address-label">이름 *</label>
+                            <input type="text" class="address-input-small" id="userName" placeholder="홍길동" required>
+                        </div>
+                        <div class="address-field">
+                            <label class="address-label">연락처 *</label>
+                            <input type="tel" class="address-input-small" id="userPhone" placeholder="010-1234-5678" required oninput="formatPhoneNumber(this)" onfocus="handlePhoneFocus(this)" onblur="handlePhoneBlur(this)">
+                        </div>
+                        <div class="address-field">
+                            <label class="address-label">이메일 *</label>
+                            <input type="email" class="address-input-small" id="userEmail" placeholder="example@email.com" required>
+                        </div>
+                        <div class="privacy-agreement">
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="privacyAgreement" required>
+                                <label for="privacyAgreement" class="checkbox-label">
+                                    <span class="checkbox-text">
+                                        <strong>개인정보 수집 및 이용에 동의합니다</strong><br>
+                                        <span class="privacy-detail">
+                                            • 수집목적: 부동산 분석 보고서 전달<br>
+                                            • 수집항목: 이름, 연락처, 이메일<br>
+                                            • 보유기간: 보고서 지급 후 1개월<br>
+                                            • 동의를 거부할 권리가 있으며, 거부 시 서비스 이용이 제한됩니다.
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Navigation -->
+                    <div class="modal-navigation">
+                        <button class="nav-btn prev" onclick="goToPreviousStep()" id="prevBtn">이전</button>
+                        <button class="nav-btn next" onclick="goToNextStep()" id="nextBtn">다음</button>
+                    </div>
+                </div>
+                
+                <!-- Step 7: 지역별 전세사기 통계 + 결제 정보 -->
+                <div class="step-content" data-step="7">
+                    <div class="step-question">리포트를 통해 더 확인해보세요!</div>
+                    <div class="fraud-stats-section" style="margin: 1rem auto; max-width: 300px; width: 100%;">
+                        <div class="fraud-stats-card" id="fraudStatsCard">
+                            <div class="stats-header">
+                                <div class="stats-location" id="statsLocation">서울시 강남구</div>
+                                <div class="stats-year">2025년 기준</div>
+                            </div>
+                            <div class="stats-content">
+                                <div class="stat-item">
+                                    <div class="stat-label">전세사기 발생 건수</div>
+                                    <div class="stat-value" id="fraudCount">12건</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">피해 금액</div>
+                                    <div class="stat-value" id="fraudAmount">3억 2천만원</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">전국 대비 위험도</div>
+                                    <div class="stat-value" id="riskLevel">보통</div>
+                                </div>
+                            </div>
+                            <div class="stats-warning">
+                                <div class="warning-icon">⚠️</div>
+                                <div class="warning-text">
+                                    해당 지역에서 전세사기가 발생하고 있습니다.<br>
+                                    <strong>보증지킴이</strong>로 안전한 거래를 확인하세요!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 결제 정보 섹션 -->
+                    <div class="payment-section">
+                        <div class="payment-info">
+                            <div class="payment-header">
+                                <span class="payment-icon">💳</span>
+                                <span class="payment-title">1회 보고서 발급비용</span>
+                            </div>
+                            <div class="payment-amount">
+                                <span class="original-price">12,900원</span>
+                                <span class="discounted-price">6,900원</span>
+                                <span class="discount-badge">할인</span>
+                            </div>
+                        </div>
+                        <div class="payment-method">
+                            <div class="payment-method-title">무통장 입금</div>
+                            <div class="bank-info">
+                                <div class="bank-detail">
+                                    <span class="bank-label">입금계좌:</span>
+                                    <span class="bank-account">국민은행 123-456-789012</span>
+                                </div>
+                                <div class="bank-detail">
+                                    <span class="bank-label">예금주:</span>
+                                    <span class="bank-holder">보증지킴이</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="payment-status">
+                            <div class="payment-status-title">입금 확인</div>
+                            <div class="payment-buttons">
+                                <button class="payment-btn paid" onclick="markAsPaid()">
+                                    ✅ 입금했어요!
+                                </button>
+                                <button class="payment-btn not-paid" onclick="markAsNotPaid()">
+                                    ⏳ 아직 안했어요!
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation -->
+                    <div class="modal-navigation">
+                        <button class="nav-btn prev" onclick="goToPreviousStep()" id="prevBtn">이전</button>
+                        <button class="nav-btn next" onclick="completeForm()" id="nextBtn" disabled>신청하기!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // EmailJS 초기화
+        (function() {
+            emailjs.init("IlLEKruddDnX0TLdG");
+        })();
+
+        // EmailJS 설정
+        const EMAILJS_CONFIG = {
+            serviceId: "service_1bvu13q",
+            templateId: "template_ocdkmfj",
+            publicKey: "IlLEKruddDnX0TLdG"
+        };
+
+        // Google Sheets 연동을 위한 설정
+        const GOOGLE_SHEETS_CONFIG = {
+            scriptUrl: "https://script.google.com/macros/s/AKfycbwgiHFWW96zibkdPh7O4YEF8jNrt0HNpB4q9Y-8ph8M_DMzzEp0nQogTNFCvAggnQEo/exec",
+            sheetName: "bojeungjikimi_DB"
+        };
+
+        // 전화번호 자동 포맷팅 함수
+        function formatPhoneNumber(input) {
+            let value = input.value.replace(/[^\d]/g, ''); // 숫자만 추출
+            
+            // 010으로 시작하지 않으면 010으로 설정
+            if (!value.startsWith('010')) {
+                value = '010' + value.replace(/^010/, '');
+            }
+            
+            // 최대 11자리까지만 허용
+            if (value.length > 11) {
+                value = value.substring(0, 11);
+            }
+            
+            // 하이픈 자동 추가 (4글자마다)
+            let formatted = '';
+            if (value.length >= 3) {
+                formatted = value.substring(0, 3);
+                if (value.length >= 7) {
+                    formatted += '-' + value.substring(3, 7);
+                    if (value.length >= 11) {
+                        formatted += '-' + value.substring(7, 11);
+                    } else if (value.length > 7) {
+                        formatted += '-' + value.substring(7);
+                    }
+                } else if (value.length > 3) {
+                    formatted += '-' + value.substring(3);
+                }
+            } else {
+                formatted = value;
+            }
+            
+            input.value = formatted;
+        }
+
+        // 전화번호 입력 필드 포커스 이벤트
+        function handlePhoneFocus(input) {
+            // 포커스 시 커서를 010 뒤로 이동
+            if (input.value === '010') {
+                setTimeout(() => {
+                    input.setSelectionRange(3, 3);
+                }, 0);
+            }
+        }
+
+        // 전화번호 입력 필드 블러 이벤트
+        function handlePhoneBlur(input) {
+            // 블러 시 010만 있으면 그대로 유지
+            if (input.value === '010') {
+                input.value = '010';
+            }
+        }
+
+        // 본인 정보 입력 검증 함수
+        function validatePersonalInfo() {
+            const userName = document.getElementById('userName');
+            const userPhone = document.getElementById('userPhone');
+            const userEmail = document.getElementById('userEmail');
+            const privacyAgreement = document.getElementById('privacyAgreement');
+            
+            // 이름 검증
+            if (!userName || !userName.value.trim()) {
+                alert('이름을 입력해주세요.');
+                if (userName) userName.focus();
+                return false;
+            }
+            
+            // 연락처 검증
+            if (!userPhone || !userPhone.value.trim()) {
+                alert('연락처를 입력해주세요.');
+                if (userPhone) userPhone.focus();
+                return false;
+            }
+            
+            // 전화번호 형식 검증 (010-XXXX-XXXX)
+            const phoneRegex = /^010-\d{4}-\d{4}$/;
+            if (!phoneRegex.test(userPhone.value.trim())) {
+                alert('올바른 전화번호 형식을 입력해주세요.\n(예: 010-1234-5678)');
+                if (userPhone) userPhone.focus();
+                return false;
+            }
+            
+            // 이메일 검증
+            if (!userEmail || !userEmail.value.trim()) {
+                alert('이메일을 입력해주세요.');
+                if (userEmail) userEmail.focus();
+                return false;
+            }
+            
+            // 이메일 형식 검증
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(userEmail.value.trim())) {
+                alert('올바른 이메일 형식을 입력해주세요.\n(예: example@email.com)');
+                if (userEmail) userEmail.focus();
+                return false;
+            }
+            
+            // 개인정보 동의 검증
+            if (!privacyAgreement || !privacyAgreement.checked) {
+                alert('개인정보 수집 및 이용에 동의해주세요.');
+                if (privacyAgreement) privacyAgreement.focus();
+                return false;
+            }
+            
+            return true;
+        }
+
+        // 지역별 전세사기 통계 데이터
+        const fraudStatsData = {
+            '서울시 강남구': { count: 12, amount: '3억 2천만원', risk: '보통' },
+            '서울시 서초구': { count: 8, amount: '2억 1천만원', risk: '낮음' },
+            '서울시 송파구': { count: 15, amount: '4억 5천만원', risk: '높음' },
+            '서울시 강동구': { count: 6, amount: '1억 8천만원', risk: '낮음' },
+            '서울시 마포구': { count: 9, amount: '2억 7천만원', risk: '보통' },
+            '서울시 영등포구': { count: 11, amount: '3억 1천만원', risk: '보통' },
+            '서울시 구로구': { count: 7, amount: '2억 2천만원', risk: '낮음' },
+            '서울시 금천구': { count: 4, amount: '1억 2천만원', risk: '낮음' },
+            '서울시 관악구': { count: 13, amount: '3억 8천만원', risk: '높음' },
+            '서울시 동작구': { count: 8, amount: '2억 3천만원', risk: '보통' },
+            '서울시 서대문구': { count: 5, amount: '1억 5천만원', risk: '낮음' },
+            '서울시 은평구': { count: 6, amount: '1억 9천만원', risk: '낮음' },
+            '서울시 종로구': { count: 3, amount: '9천만원', risk: '낮음' },
+            '서울시 중구': { count: 4, amount: '1억 1천만원', risk: '낮음' },
+            '서울시 용산구': { count: 7, amount: '2억 4천만원', risk: '보통' },
+            '서울시 성동구': { count: 5, amount: '1억 6천만원', risk: '낮음' },
+            '서울시 광진구': { count: 6, amount: '1억 8천만원', risk: '낮음' },
+            '서울시 중랑구': { count: 8, amount: '2억 5천만원', risk: '보통' },
+            '서울시 성북구': { count: 4, amount: '1억 3천만원', risk: '낮음' },
+            '서울시 강북구': { count: 3, amount: '8천만원', risk: '낮음' },
+            '서울시 도봉구': { count: 2, amount: '6천만원', risk: '낮음' },
+            '서울시 노원구': { count: 5, amount: '1억 4천만원', risk: '낮음' },
+            '서울시 양천구': { count: 7, amount: '2억 1천만원', risk: '보통' },
+            '서울시 강서구': { count: 6, amount: '1억 7천만원', risk: '낮음' },
+            '서울시 구로구': { count: 7, amount: '2억 2천만원', risk: '낮음' },
+            '서울시 금천구': { count: 4, amount: '1억 2천만원', risk: '낮음' },
+            '서울시 관악구': { count: 13, amount: '3억 8천만원', risk: '높음' },
+            '서울시 동작구': { count: 8, amount: '2억 3천만원', risk: '보통' },
+            '서울시 서대문구': { count: 5, amount: '1억 5천만원', risk: '낮음' },
+            '서울시 은평구': { count: 6, amount: '1억 9천만원', risk: '낮음' },
+            '서울시 종로구': { count: 3, amount: '9천만원', risk: '낮음' },
+            '서울시 중구': { count: 4, amount: '1억 1천만원', risk: '낮음' },
+            '서울시 용산구': { count: 7, amount: '2억 4천만원', risk: '보통' },
+            '서울시 성동구': { count: 5, amount: '1억 6천만원', risk: '낮음' },
+            '서울시 광진구': { count: 6, amount: '1억 8천만원', risk: '낮음' },
+            '서울시 중랑구': { count: 8, amount: '2억 5천만원', risk: '보통' },
+            '서울시 성북구': { count: 4, amount: '1억 3천만원', risk: '낮음' },
+            '서울시 강북구': { count: 3, amount: '8천만원', risk: '낮음' },
+            '서울시 도봉구': { count: 2, amount: '6천만원', risk: '낮음' },
+            '서울시 노원구': { count: 5, amount: '1억 4천만원', risk: '낮음' },
+            '서울시 양천구': { count: 7, amount: '2억 1천만원', risk: '보통' },
+            '서울시 강서구': { count: 6, amount: '1억 7천만원', risk: '낮음' },
+            '경기도 성남시': { count: 9, amount: '2억 6천만원', risk: '보통' },
+            '경기도 수원시': { count: 11, amount: '3억 2천만원', risk: '보통' },
+            '경기도 고양시': { count: 7, amount: '2억 1천만원', risk: '보통' },
+            '경기도 용인시': { count: 8, amount: '2억 4천만원', risk: '보통' },
+            '경기도 부천시': { count: 6, amount: '1억 8천만원', risk: '낮음' },
+            '경기도 안양시': { count: 5, amount: '1억 5천만원', risk: '낮음' },
+            '경기도 안산시': { count: 4, amount: '1억 2천만원', risk: '낮음' },
+            '경기도 의정부시': { count: 3, amount: '9천만원', risk: '낮음' },
+            '경기도 평택시': { count: 2, amount: '6천만원', risk: '낮음' },
+            '경기도 시흥시': { count: 3, amount: '8천만원', risk: '낮음' },
+            '경기도 김포시': { count: 4, amount: '1억 1천만원', risk: '낮음' },
+            '경기도 광주시': { count: 2, amount: '5천만원', risk: '낮음' },
+            '경기도 이천시': { count: 1, amount: '3천만원', risk: '낮음' },
+            '경기도 양주시': { count: 1, amount: '2천만원', risk: '낮음' },
+            '경기도 오산시': { count: 2, amount: '6천만원', risk: '낮음' },
+            '경기도 의왕시': { count: 1, amount: '3천만원', risk: '낮음' },
+            '경기도 하남시': { count: 3, amount: '8천만원', risk: '낮음' },
+            '경기도 여주시': { count: 1, amount: '2천만원', risk: '낮음' },
+            '경기도 양평군': { count: 0, amount: '0원', risk: '매우 낮음' },
+            '경기도 연천군': { count: 0, amount: '0원', risk: '매우 낮음' },
+            '경기도 가평군': { count: 0, amount: '0원', risk: '매우 낮음' },
+            '인천시 연수구': { count: 5, amount: '1억 4천만원', risk: '낮음' },
+            '인천시 남동구': { count: 6, amount: '1억 7천만원', risk: '낮음' },
+            '인천시 부평구': { count: 4, amount: '1억 1천만원', risk: '낮음' },
+            '인천시 계양구': { count: 3, amount: '8천만원', risk: '낮음' },
+            '인천시 서구': { count: 2, amount: '5천만원', risk: '낮음' },
+            '인천시 미추홀구': { count: 3, amount: '8천만원', risk: '낮음' },
+            '인천시 동구': { count: 1, amount: '3천만원', risk: '낮음' },
+            '인천시 중구': { count: 1, amount: '2천만원', risk: '낮음' },
+            '인천시 강화군': { count: 0, amount: '0원', risk: '매우 낮음' },
+            '인천시 옹진군': { count: 0, amount: '0원', risk: '매우 낮음' }
+        };
+
+        // 멀티스텝 모달 데이터 저장
+        let modalData = {
+            propertyType: '',
+            trafficCode: '',
+            residenceStatus: '',
+            detailStatus: '',
+            amount: 0,
+            monthlyRent: 0,
+            contractPeriod: '',
+            address: '',
+            userName: '',
+            userPhone: '',
+            userEmail: '',
+            privacyAgreement: false
+        };
+        
+        let currentStep = 1;
+        const totalSteps = 7;
+        
+        // Modal functions
+        function openModal() {
+            const modal = document.getElementById('paymentModal');
+            if (modal) {
+                modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+                resetModal();
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('paymentModal');
+            if (modal) {
+                modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+            }
+        }
+        
+        function resetModal() {
+            currentStep = 1;
+            modalData = {
+                propertyType: '',
+                trafficCode: '',
+                residenceStatus: '',
+                amount: 0,
+                monthlyRent: 0,
+                contractPeriod: '',
+                address: ''
+            };
+            updateStepDisplay();
+            updateNavigationButtons();
+            resetAmountInput();
+        }
+
+        // Make functions globally available
+        window.openModal = openModal;
+        window.closeModal = closeModal;
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('paymentModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // 단계별 네비게이션
+        function goToNextStep() {
+            // 현재 단계 데이터 저장
+            saveCurrentStepData();
+            
+            // Step 2에서 특별한 로직 처리
+            if (currentStep === 2) {
+                const selectedOption = document.querySelector('.step-content[data-step="2"] .option-btn.selected');
+                if (selectedOption) {
+                    const value = selectedOption.getAttribute('data-value');
+                    if (value === '현재거주') {
+                        // 현재거주는 바로 Step 3으로
+                        currentStep = 3;
+                    } else {
+                        // 나머지는 Step 2-2로
+                        currentStep = '2-2';
+                    }
+                } else {
+                    currentStep++;
+                }
+            } else if (currentStep === '2-2') {
+                // Step 2-2에서 Step 3으로
+                currentStep = 3;
+            } else if (currentStep === 3) {
+                // Step 3에서 Step 4로
+                currentStep = 4;
+            } else if (currentStep === 4) {
+                // Step 4에서 Step 5로
+                currentStep = 5;
+            } else if (currentStep === 5) {
+                // Step 5에서 Step 6으로
+                currentStep = 6;
+            } else if (currentStep === 6) {
+                // Step 6에서 Step 7으로 (본인 정보 입력 검증)
+                if (!validatePersonalInfo()) {
+                    return; // 검증 실패 시 진행 중단
+                }
+                currentStep = 7;
+            } else if (currentStep === 7) {
+                // Step 7에서 완료 처리 (지역별 전세사기 통계 + 결제 정보)
+                completeForm();
+                return;
+            } else {
+                // 일반적인 다음 단계로 이동
+                currentStep++;
+            }
+            
+            updateStepDisplay();
+            updateNavigationButtons();
+            updateModalTitle();
+        }
+        
+        function goToPreviousStep() {
+            if (currentStep === '2-2') {
+                // Step 2-2에서 Step 2로
+                currentStep = 2;
+            } else if (currentStep === 3) {
+                // Step 3에서 이전 단계로 (2-2 또는 2)
+                const selectedOption = document.querySelector('.step-content[data-step="2"] .option-btn.selected');
+                if (selectedOption) {
+                    const value = selectedOption.getAttribute('data-value');
+                    if (value === '현재거주') {
+                        currentStep = 2;
+                    } else {
+                        currentStep = '2-2';
+                    }
+                } else {
+                    currentStep = 2;
+                }
+            } else if (currentStep === 4) {
+                // Step 4에서 Step 3으로
+                currentStep = 3;
+            } else if (currentStep === 5) {
+                // Step 5에서 Step 4로
+                currentStep = 4;
+            } else if (currentStep === 6) {
+                // Step 6에서 Step 5로
+                currentStep = 5;
+            } else if (currentStep === 7) {
+                // Step 7에서 Step 6으로
+                currentStep = 6;
+            } else if (currentStep > 1) {
+                currentStep--;
+            }
+            
+            updateStepDisplay();
+            updateNavigationButtons();
+            updateModalTitle();
+        }
+        
+        function updateStepDisplay() {
+            // 모든 단계 숨기기
+            document.querySelectorAll('.step-content').forEach(step => {
+                step.classList.remove('active');
+            });
+            
+            // 현재 단계 보이기
+            const currentStepElement = document.querySelector(`.step-content[data-step="${currentStep}"]`);
+            if (currentStepElement) {
+                currentStepElement.classList.add('active');
+            }
+            
+            // 진행 표시 업데이트
+            document.querySelectorAll('.progress-dot').forEach((dot) => {
+                dot.classList.remove('active', 'completed', 'half-completed');
+                const dotStep = dot.getAttribute('data-step');
+                
+                // 현재 단계에 따라 progress 표시
+                if (currentStep === 1) {
+                    if (dotStep === '1') dot.classList.add('active');
+                } else if (currentStep === 2) {
+                    if (dotStep === '1') dot.classList.add('completed');
+                    if (dotStep === '2') dot.classList.add('active');
+                } else if (currentStep === '2-2') {
+                    if (dotStep === '1') dot.classList.add('completed');
+                    if (dotStep === '2') dot.classList.add('half-completed');
+                    // 2-2는 2번째 칸 안에 있으므로 별도 칸 없음
+                } else if (currentStep === 3) {
+                    if (dotStep === '1' || dotStep === '2') dot.classList.add('completed');
+                    if (dotStep === '3') dot.classList.add('active');
+                } else if (currentStep === 4) {
+                    if (dotStep === '1' || dotStep === '2' || dotStep === '3') dot.classList.add('completed');
+                    if (dotStep === '4') dot.classList.add('active');
+                } else if (currentStep === 5) {
+                    if (dotStep === '1' || dotStep === '2' || dotStep === '3' || dotStep === '4') dot.classList.add('completed');
+                    if (dotStep === '5') dot.classList.add('active');
+                } else if (currentStep === 6) {
+                    if (dotStep === '1' || dotStep === '2' || dotStep === '3' || dotStep === '4' || dotStep === '5') dot.classList.add('completed');
+                    if (dotStep === '6') dot.classList.add('active');
+                } else if (currentStep === 7) {
+                    if (dotStep === '1' || dotStep === '2' || dotStep === '3' || dotStep === '4' || dotStep === '5' || dotStep === '6') dot.classList.add('completed');
+                    if (dotStep === '7') dot.classList.add('active');
+                }
+            });
+        }
+        
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const backBtn = document.getElementById('backBtn');
+            
+            // 이전 버튼 상태
+            if (currentStep === 1) {
+                prevBtn.style.display = 'none';
+                backBtn.style.display = 'none';
+            } else {
+                prevBtn.style.display = 'block';
+                prevBtn.disabled = false;
+                backBtn.style.display = 'block';
+            }
+            
+            // 다음 버튼 텍스트
+            if (currentStep === totalSteps) {
+                nextBtn.textContent = '완료';
+            } else {
+                nextBtn.textContent = '다음';
+            }
+        }
+        
+        function updateModalTitle() {
+            const titles = {
+                1: '거래 유형 선택',
+                2: '거주 상태 선택',
+                '2-2': '현재 상태 상세 선택',
+                3: '금액 입력',
+                4: '계약 기간 입력',
+                5: '주소 입력',
+                6: '본인 정보 입력',
+                7: '지역별 전세사기 통계'
+            };
+            
+            document.getElementById('modalTitle').textContent = titles[currentStep] || '정보 입력';
+        }
+        
+        function saveCurrentStepData() {
+            switch(currentStep) {
+                case 1:
+                    const selectedProperty = document.querySelector('.step-content[data-step="1"] .option-btn.selected');
+                    if (selectedProperty) {
+                        modalData.propertyType = selectedProperty.getAttribute('data-value');
+                        modalData.trafficCode = selectedProperty.getAttribute('data-traffic');
+                    }
+                    break;
+                case 2:
+                    const selectedResidence = document.querySelector('.step-content[data-step="2"] .option-btn.selected');
+                    if (selectedResidence) {
+                        modalData.residenceStatus = selectedResidence.getAttribute('data-value');
+                    }
+                    break;
+                case '2-2':
+                    const selectedDetail = document.querySelector('.step-content[data-step="2-2"] .option-btn.selected');
+                    if (selectedDetail) {
+                        modalData.detailStatus = selectedDetail.getAttribute('data-value');
+                    }
+                    break;
+                case 3:
+                    const amountInput = document.getElementById('amountInput');
+                    if (amountInput) {
+                        modalData.amount = parseInt(amountInput.value.replace(/,/g, '')) || 0;
+                    }
+                    
+                    const monthlyAmountInput = document.getElementById('monthlyAmountInput');
+                    if (monthlyAmountInput) {
+                        modalData.monthlyRent = parseInt(monthlyAmountInput.value.replace(/,/g, '')) || 0;
+                    }
+                    break;
+                case 4:
+                    const selectedPeriod = document.querySelector('.step-content[data-step="4"] .option-btn.selected');
+                    if (selectedPeriod) {
+                        modalData.contractPeriod = selectedPeriod.getAttribute('data-value');
+                    }
+                    break;
+                case 5:
+                    const addressCityDistrict = document.getElementById('addressCityDistrict');
+                    const addressDong = document.getElementById('addressDong');
+                    const addressNumber = document.getElementById('addressNumber');
+                    const addressDetail = document.getElementById('addressDetail');
+                    
+                    let fullAddress = '';
+                    if (addressCityDistrict && addressCityDistrict.value.trim()) fullAddress += addressCityDistrict.value.trim();
+                    if (addressDong && addressDong.value.trim()) fullAddress += ' ' + addressDong.value.trim();
+                    if (addressNumber && addressNumber.value.trim()) fullAddress += ' ' + addressNumber.value.trim();
+                    if (addressDetail && addressDetail.value.trim()) fullAddress += ' ' + addressDetail.value.trim();
+                    
+                    modalData.address = fullAddress.trim();
+                    break;
+                case 6:
+                    // 본인 정보 입력 단계
+                    const userName = document.getElementById('userName');
+                    const userPhone = document.getElementById('userPhone');
+                    const userEmail = document.getElementById('userEmail');
+                    const privacyAgreement = document.getElementById('privacyAgreement');
+                    
+                    if (userName) modalData.userName = userName.value.trim();
+                    if (userPhone) modalData.userPhone = userPhone.value.trim();
+                    if (userEmail) modalData.userEmail = userEmail.value.trim();
+                    if (privacyAgreement) modalData.privacyAgreement = privacyAgreement.checked;
+                    break;
+                case 7:
+                    // 전세사기 통계 단계 - 데이터 저장 불필요
+                    break;
+            }
+        }
+        
+        async function completeForm() {
+            // 현재 단계(Step 7) 데이터 저장
+            saveCurrentStepData();
+            
+            // 디버깅을 위한 콘솔 로그
+            console.log('Complete Form - Current Step:', currentStep);
+            console.log('Complete Form - Modal Data:', modalData);
+            
+            // 기본 데이터 검증
+            if (!modalData.propertyType) {
+                console.log('Missing basic data:', { propertyType: modalData.propertyType });
+                alert('거래 유형을 선택해주세요.');
+                return;
+            }
+            
+            // 개인정보 유효성 검사
+            if (!modalData.userName || !modalData.userPhone || !modalData.userEmail) {
+                console.log('Missing personal data:', { 
+                    userName: modalData.userName, 
+                    userPhone: modalData.userPhone, 
+                    userEmail: modalData.userEmail 
+                });
+                alert('이름, 연락처, 이메일을 모두 입력해주세요.');
+                return;
+            }
+            
+            if (!modalData.privacyAgreement) {
+                console.log('Privacy agreement not checked:', modalData.privacyAgreement);
+                alert('개인정보 수집 및 이용에 동의해주세요.');
+                return;
+            }
+            
+            // 이메일 형식 검증
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(modalData.userEmail)) {
+                alert('올바른 이메일 형식을 입력해주세요.');
+                return;
+            }
+            
+            // 전화번호 형식 검증 (010으로 시작하는 11자리)
+            const phoneRegex = /^010-\d{4}-\d{4}$/;
+            if (!phoneRegex.test(modalData.userPhone)) {
+                alert('올바른 전화번호 형식을 입력해주세요. (예: 010-1234-5678)');
+                return;
+            }
+            
+            // 로딩 표시
+            const nextBtn = document.getElementById('nextBtn');
+            const originalText = nextBtn.textContent;
+            nextBtn.textContent = '처리 중...';
+            nextBtn.disabled = true;
+            
+            try {
+                // Google Sheets에 데이터 전송
+                console.log('Google Sheets에 데이터 전송 중...');
+                const sheetsSuccess = await sendDataToGoogleSheets(modalData);
+                
+                // EmailJS로 이메일 전송
+                console.log('이메일 전송 중...');
+                const emailSuccess = await sendEmailNotification(modalData);
+                
+                // 트래픽 추적
+                trackTraffic(modalData.trafficCode, modalData.propertyType);
+            
+                // 완료 알림
+                let alertMessage = `🎉 안전성 검증 신청이 완료되었습니다!\n\n선택된 정보:\n` +
+                          `• 거래 유형: ${modalData.propertyType}\n` +
+                      `• 거주 상태: ${modalData.residenceStatus}\n` +
+                      `• 보증금: ${formatNumberToKorean(modalData.amount)}\n`;
+                
+                if (modalData.monthlyRent > 0) {
+                    alertMessage += `• 월세: ${formatNumberToKorean(modalData.monthlyRent)}\n`;
+                }
+                
+                alertMessage += `• 계약 기간: ${modalData.contractPeriod}\n` +
+                      `• 주소: ${modalData.address}\n` +
+                      `• 이름: ${modalData.userName}\n` +
+                      `• 연락처: ${modalData.userPhone}\n` +
+                          `• 이메일: ${modalData.userEmail}\n\n`;
+                    
+                    if (emailSuccess) {
+                        alertMessage += `✅ 확인 이메일이 ${modalData.userEmail}로 발송되었습니다.\n\n`;
+                    }
+                    
+                    alertMessage += `보증지킴이가 신속하게 전문가가 전세사기 예방을 위한\n` +
+                      `   종합적인 안전성 검증 리포트를 보내드립니다.\n\n` +
+                      `감사합니다!`;
+                
+                // 성공/실패에 따른 메시지 표시
+                if (sheetsSuccess && emailSuccess) {
+                    alert(alertMessage);
+                    console.log('✅ 모든 작업이 성공적으로 완료되었습니다.');
+                } else if (sheetsSuccess || emailSuccess) {
+                    alertMessage += `\n\n⚠️ 일부 작업에서 문제가 발생했을 수 있습니다.`;
+                    alert(alertMessage);
+                    console.warn('⚠️ 일부 작업이 실패했습니다.');
+                } else {
+                    alert('❌ 처리 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+                    console.error('❌ 모든 작업이 실패했습니다.');
+                }
+                
+                console.log('수집된 데이터:', modalData);
+                console.log('Google Sheets 저장:', sheetsSuccess ? '성공' : '실패');
+                console.log('이메일 전송:', emailSuccess ? '성공' : '실패');
+                
+                closeModal();
+                
+            } catch (error) {
+                console.error('폼 완료 처리 중 오류:', error);
+                alert('처리 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+            } finally {
+                // 버튼 상태 복원
+                nextBtn.textContent = originalText;
+                nextBtn.disabled = false;
+            }
+        }
+        
+        // 금액 관련 함수들
+        function resetAmountInput() {
+            const amountInput = document.getElementById('amountInput');
+            const amountText = document.getElementById('amountText');
+            const monthlyAmountInput = document.getElementById('monthlyAmountInput');
+            const monthlyAmountText = document.getElementById('monthlyAmountText');
+            const monthlyRentSection = document.getElementById('monthlyRentSection');
+            
+            amountInput.value = '';
+            amountText.style.display = 'none';
+            monthlyAmountInput.value = '';
+            monthlyAmountText.style.display = 'none';
+            monthlyRentSection.style.display = 'none';
+        }
+        
+        function addAmount(amount) {
+            const amountInput = document.getElementById('amountInput');
+            const currentValue = amountInput.value.replace(/,/g, '');
+            const currentAmount = currentValue ? parseInt(currentValue) : 0;
+            const newAmount = currentAmount + amount;
+            amountInput.value = newAmount.toLocaleString();
+            formatAmount(amountInput);
+        }
+        
+        function formatAmount(input) {
+            const value = input.value.replace(/,/g, '');
+            const numValue = parseInt(value);
+            const amountText = document.getElementById('amountText');
+            
+            if (!isNaN(numValue) && numValue > 0) {
+                input.value = numValue.toLocaleString();
+                amountText.textContent = formatNumberToKorean(numValue);
+                amountText.style.display = 'block';
+            } else {
+                amountText.style.display = 'none';
+            }
+        }
+        
+        function formatNumberToKorean(num) {
+            if (num >= 100000000) {
+                const eok = Math.floor(num / 100000000);
+                const man = Math.floor((num % 100000000) / 10000);
+                if (man > 0) {
+                    return eok + '억 ' + man + '만원';
+                }
+                return eok + '억원';
+            } else if (num >= 10000) {
+                return Math.floor(num / 10000) + '만원';
+            } else if (num >= 1000) {
+                return Math.floor(num / 1000) + '천원';
+            } else {
+                return num.toLocaleString() + '원';
+            }
+        }
+        
+        // 월세 관련 함수들
+        function addMonthlyAmount(amount) {
+            const monthlyAmountInput = document.getElementById('monthlyAmountInput');
+            const currentValue = monthlyAmountInput.value.replace(/,/g, '');
+            const currentAmount = currentValue ? parseInt(currentValue) : 0;
+            const newAmount = currentAmount + amount;
+            monthlyAmountInput.value = newAmount.toLocaleString();
+            formatMonthlyAmount(monthlyAmountInput);
+        }
+        
+        function formatMonthlyAmount(input) {
+            const value = input.value.replace(/,/g, '');
+            const numValue = parseInt(value);
+            const monthlyAmountText = document.getElementById('monthlyAmountText');
+            
+            if (!isNaN(numValue) && numValue > 0) {
+                input.value = numValue.toLocaleString();
+                monthlyAmountText.textContent = formatNumberToKorean(numValue);
+                monthlyAmountText.style.display = 'block';
+            } else {
+                monthlyAmountText.style.display = 'none';
+            }
+        }
+        
+        // 거래 유형에 따른 월세 입력란 표시/숨김
+        function toggleMonthlyRentSection() {
+            const monthlyRentSection = document.getElementById('monthlyRentSection');
+            const selectedProperty = document.querySelector('.step-content[data-step="1"] .option-btn.selected');
+            
+            if (selectedProperty) {
+                const propertyType = selectedProperty.getAttribute('data-value');
+                if (propertyType === '월세' || propertyType === '반전세') {
+                    monthlyRentSection.style.display = 'block';
+                } else {
+                    monthlyRentSection.style.display = 'none';
+                    // 월세 관련 데이터 초기화
+                    document.getElementById('monthlyAmountInput').value = '';
+                    document.getElementById('monthlyAmountText').style.display = 'none';
+                    modalData.monthlyRent = 0;
+                }
+            }
+        }
+        
+        function searchAddress() {
+            const addressCityDistrict = document.getElementById('addressCityDistrict');
+            const addressDong = document.getElementById('addressDong');
+            
+            if (addressCityDistrict && addressCityDistrict.value.trim() && 
+                addressDong && addressDong.value.trim()) {
+                // 실제 구현 시 주소 검색 API 연동
+                const fullAddress = `${addressCityDistrict.value.trim()} ${addressDong.value.trim()}`;
+                console.log('주소 검색:', fullAddress);
+                alert('주소 검색 기능은 실제 구현 시 API와 연동됩니다.');
+            } else {
+                alert('시/도, 구/군과 동/읍/면을 입력해주세요.');
+            }
+        }
+
+        // 지역별 전세사기 통계 업데이트 함수
+        function updateFraudStats() {
+            const addressCityDistrict = document.getElementById('addressCityDistrict');
+            if (!addressCityDistrict || !addressCityDistrict.value.trim()) {
+                return;
+            }
+
+            const cityDistrict = addressCityDistrict.value.trim();
+            const stats = fraudStatsData[cityDistrict];
+            
+            if (stats) {
+                // 통계 데이터 업데이트
+                document.getElementById('statsLocation').textContent = cityDistrict;
+                document.getElementById('fraudCount').textContent = stats.count + '건';
+                document.getElementById('fraudAmount').textContent = stats.amount;
+                document.getElementById('riskLevel').textContent = stats.risk;
+                
+                // 위험도에 따른 색상 조정
+                const riskLevelElement = document.getElementById('riskLevel');
+                const fraudStatsCard = document.getElementById('fraudStatsCard');
+                
+                // 기존 색상 클래스 제거
+                fraudStatsCard.classList.remove('risk-low', 'risk-medium', 'risk-high', 'risk-very-low');
+                
+                // 위험도에 따른 색상 적용
+                switch(stats.risk) {
+                    case '매우 낮음':
+                        fraudStatsCard.classList.add('risk-very-low');
+                        riskLevelElement.style.color = '#10b981';
+                        break;
+                    case '낮음':
+                        fraudStatsCard.classList.add('risk-low');
+                        riskLevelElement.style.color = '#3b82f6';
+                        break;
+                    case '보통':
+                        fraudStatsCard.classList.add('risk-medium');
+                        riskLevelElement.style.color = '#f59e0b';
+                        break;
+                    case '높음':
+                        fraudStatsCard.classList.add('risk-high');
+                        riskLevelElement.style.color = '#ef4444';
+                        break;
+                }
+            } else {
+                // 데이터가 없는 경우 기본값 설정
+                document.getElementById('statsLocation').textContent = cityDistrict;
+                document.getElementById('fraudCount').textContent = '데이터 없음';
+                document.getElementById('fraudAmount').textContent = '데이터 없음';
+                document.getElementById('riskLevel').textContent = '알 수 없음';
+            }
+        }
+        
+        // 트래픽 추적 함수
+        function trackTraffic(trafficCode, propertyType) {
+            console.log(`트래픽 추적: 코드 ${trafficCode} - ${propertyType}`);
+            
+            
+            // Facebook Pixel 이벤트 전송
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Lead', {
+                    content_name: propertyType,
+                    content_category: 'property_type',
+                    value: trafficCode
+                });
+            }
+        }
+
+
+
+
+
+
+
+        // DOM 로드 시 모든 초기화 작업
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 옵션 버튼 클릭 이벤트 추가
+            document.querySelectorAll('.option-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    // 같은 단계의 다른 버튼들에서 selected 클래스 제거
+                    const currentStepElement = this.closest('.step-content');
+                    currentStepElement.querySelectorAll('.option-btn').forEach(btn => {
+                        btn.classList.remove('selected');
+                    });
+                    
+                    // 클릭한 버튼에 selected 클래스 추가
+                    this.classList.add('selected');
+                    
+                    // 데이터 저장
+                    saveCurrentStepData();
+                    
+                    // 1단계에서 거래 유형 선택 시 월세 입력란 토글
+                    if (currentStepElement.getAttribute('data-step') === '1') {
+                        toggleMonthlyRentSection();
+                    }
+                });
+            });
+            
+            // FAQ 토글 기능
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    
+                    // 모든 FAQ 아이템 닫기
+                    faqItems.forEach(faqItem => {
+                        faqItem.classList.remove('active');
+                    });
+                    
+                    // 클릭한 아이템만 열기 (토글)
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+            
+            // Problem Card 클릭 기능
+            const problemCards = document.querySelectorAll('.problem-card');
+            problemCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    // 모든 problem-card에서 active 클래스 제거
+                    problemCards.forEach(problemCard => {
+                        problemCard.classList.remove('active');
+                    });
+                    
+                    // 클릭한 카드에 active 클래스 추가
+                    card.classList.add('active');
+                });
+            });
+            
+            // 카운터 애니메이션
+            const counterNumbers = document.querySelectorAll('.counter-number');
+            const animateCounter = (element) => {
+                const targetStr = element.getAttribute('data-target');
+                const target = parseFloat(targetStr.replace(/,/g, ''));
+                const duration = 2000; // 2초
+                const start = performance.now();
+                
+                const updateCounter = (currentTime) => {
+                    const elapsed = currentTime - start;
+                    const progress = Math.min(elapsed / duration, 1);
+                    
+                    const current = target * progress;
+                    
+                    // 숫자 포맷팅 (천 단위 콤마 추가)
+                    if (targetStr.includes(',')) {
+                        element.textContent = Math.floor(current).toLocaleString();
+                    } else if (target % 1 === 0) {
+                        element.textContent = Math.floor(current);
+                    } else {
+                        element.textContent = current.toFixed(1);
+                    }
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCounter);
+                    }
+                };
+                
+                requestAnimationFrame(updateCounter);
+            };
+            
+            // Intersection Observer로 카운터 애니메이션 트리거
+            const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                        animateCounter(entry.target);
+                        counterObserver.unobserve(entry.target);
+                    }
+                });
+            });
+            
+            counterNumbers.forEach(counter => {
+                counterObserver.observe(counter);
+            });
+            
+            // 걱정 말풍선 클릭 기능 (선택사항)
+            const worryBubbles = document.querySelectorAll('.worry-bubble');
+            worryBubbles.forEach(bubble => {
+                bubble.addEventListener('click', () => {
+                    // 말풍선 클릭 시 약간의 애니메이션 효과
+                    bubble.style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        bubble.style.transform = 'scale(1)';
+                    }, 150);
+                    
+                    const scenario = bubble.getAttribute('data-scenario');
+                    console.log(`걱정 상황 ${scenario} 클릭됨`);
+                });
+            });
+            
+            // Problem Card 네비게이션 기능
+            let currentProblemCard = 1;
+            const totalProblemCards = 3;
+            
+            window.changeProblemCard = function(direction) {
+                const newIndex = currentProblemCard + direction;
+                
+                if (newIndex >= 1 && newIndex <= totalProblemCards) {
+                    const currentCard = document.querySelector(`.problem-card[data-card="${currentProblemCard}"]`);
+                    const newCard = document.querySelector(`.problem-card[data-card="${newIndex}"]`);
+                    
+                    // 현재 카드 슬라이드 아웃 애니메이션
+                    if (direction > 0) {
+                        currentCard.classList.add('slide-out-left');
+                    } else {
+                        currentCard.classList.add('slide-out-right');
+                    }
+                    
+                    // 새 카드 준비 (슬라이드 인 위치)
+                    if (direction > 0) {
+                        newCard.classList.add('slide-in-right');
+                    } else {
+                        newCard.classList.add('slide-in-left');
+                    }
+                    
+                   // 애니메이션 완료 후 상태 업데이트
+                   setTimeout(() => {
+                       // 현재 카드에서 active와 슬라이드 클래스 제거
+                       currentCard.classList.remove('active', 'slide-out-left', 'slide-out-right');
+                       document.querySelector(`.progress-step[data-step="${currentProblemCard}"]`).classList.remove('active');
+                       document.querySelector(`.dot[data-dot="${currentProblemCard}"]`).classList.remove('active');
+                       
+                       // 새 카드에서 슬라이드 인 클래스 제거하고 active 추가
+                       currentProblemCard = newIndex;
+                       newCard.classList.remove('slide-in-left', 'slide-in-right');
+                       newCard.classList.add('active');
+                       document.querySelector(`.progress-step[data-step="${currentProblemCard}"]`).classList.add('active');
+                       document.querySelector(`.dot[data-dot="${currentProblemCard}"]`).classList.add('active');
+                       
+                       // 버튼 상태 업데이트
+                       updateNavigationButtons();
+                   }, 300); // transition 시간과 동일
+                }
+            };
+            
+            function updateProblemCardNavigationButtons() {
+                const prevButton = document.querySelector('.nav-button.prev');
+                const nextButton = document.querySelector('.nav-button.next');
+                
+                prevButton.disabled = currentProblemCard === 1;
+                nextButton.disabled = currentProblemCard === totalProblemCards;
+            }
+            
+            // 도트 클릭 기능
+            document.querySelectorAll('.dot').forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const targetCard = parseInt(dot.getAttribute('data-dot'));
+                    if (targetCard !== currentProblemCard) {
+                        const direction = targetCard - currentProblemCard;
+                        changeProblemCard(direction);
+                    }
+                });
+            });
+            
+            // 초기 버튼 상태 설정
+            updateProblemCardNavigationButtons();
+            
+            // CTA 버튼 이벤트 리스너 추가
+            const heroCta = document.getElementById('hero-cta');
+            if (heroCta) {
+                heroCta.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    scrollToSection('curiosity');
+                });
+            }
+            
+            // 모든 CTA 버튼에 클릭 이벤트 추가
+            const ctaButtons = document.querySelectorAll('.cta-button');
+            ctaButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // onclick 속성 실행
+                    const onclickAttr = this.getAttribute('onclick');
+                    if (onclickAttr) {
+                        eval(onclickAttr);
+                    }
+                });
+            });
+            
+            // 섹션 애니메이션 초기화
+            initSectionAnimations();
+            
+            // Verification Cases 애니메이션 초기화
+            initVerificationCasesAnimation();
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Scroll to section function
+        function scrollToSection(sectionId) {
+            console.log('Attempting to scroll to:', sectionId);
+            const element = document.getElementById(sectionId);
+            if (element) {
+                console.log('Element found, scrolling...');
+                element.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            } else {
+                console.error('Element not found:', sectionId);
+            }
+        }
+
+        // Make scrollToSection globally available
+        window.scrollToSection = scrollToSection;
+
+        // Steps accordion functionality
+        function toggleStep(stepNumber) {
+            const stepItem = document.querySelector(`.step-item[data-step="${stepNumber}"]`);
+            const isActive = stepItem.classList.contains('active');
+            
+            // Close all other steps
+            document.querySelectorAll('.step-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Toggle current step
+            if (!isActive) {
+                stepItem.classList.add('active');
+            }
+        }
+
+        // Make toggleStep globally available
+        window.toggleStep = toggleStep;
+
+        // Verification Cases 순차적 애니메이션
+        function initVerificationCasesAnimation() {
+            const verificationCases = document.querySelector('.verification-cases');
+            if (verificationCases) {
+                const caseItems = verificationCases.querySelectorAll('.case-item');
+                const warningBox = verificationCases.querySelector('.cases-warning');
+                
+                const animateCases = () => {
+                    // 각 카드를 순차적으로 애니메이션
+                    caseItems.forEach((item, index) => {
+                        const delay = parseInt(item.getAttribute('data-delay')) || index * 200;
+                        
+                        setTimeout(() => {
+                            item.classList.add('animate-in');
+                            
+                            // 카드가 나타날 때 약간의 진동 효과
+                            setTimeout(() => {
+                                item.style.transform = 'translateX(0) scale(1.02)';
+                                setTimeout(() => {
+                                    item.style.transform = 'translateX(0) scale(1)';
+                                }, 100);
+                            }, 50);
+                        }, delay);
+                    });
+                    
+                    // 마지막에 경고 메시지 애니메이션
+                    if (warningBox) {
+                        const warningDelay = parseInt(warningBox.getAttribute('data-delay')) || 800;
+                        setTimeout(() => {
+                            warningBox.classList.add('animate-in');
+                            
+                            // 경고 메시지에 펄스 효과
+                            setTimeout(() => {
+                                warningBox.style.animation = 'pulse 0.6s ease-in-out';
+                                setTimeout(() => {
+                                    warningBox.style.animation = '';
+                                }, 600);
+                            }, 300);
+                        }, warningDelay);
+                    }
+                };
+                
+                // Intersection Observer로 섹션이 보일 때 애니메이션 시작
+                const casesObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            animateCases();
+                            casesObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.3 });
+                
+                casesObserver.observe(verificationCases);
+            }
+        }
+        
+        // 섹션별 애니메이션 로직
+        function initSectionAnimations() {
+            // Intersection Observer 설정
+            const observerOptions = {
+                threshold: 0.2,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const section = entry.target;
+                        
+                        // 섹션에 animate 클래스 추가
+                        section.classList.add('animate');
+                        
+                        // 섹션 내부의 아이템들에 순차적으로 animate 클래스 추가
+                        const items = section.querySelectorAll('.breakdown-item, .caution-item, .improvement-item');
+                        items.forEach((item, index) => {
+                            setTimeout(() => {
+                                item.classList.add('animate');
+                            }, index * 200); // 200ms 간격으로 순차 애니메이션
+                        });
+                        
+                        // 한 번만 실행되도록 observer 해제
+                        sectionObserver.unobserve(section);
+                    }
+                });
+            }, observerOptions);
+            
+            // 애니메이션 대상 섹션들 관찰 시작
+            const sections = document.querySelectorAll('.score-breakdown, .caution-section, .improvement-section');
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+        }
+        
+        // 결제 상태 관리
+        let paymentStatus = 'not-paid'; // 'paid' 또는 'not-paid'
+        
+        function markAsPaid() {
+            paymentStatus = 'paid';
+            updatePaymentButtons();
+            updateNextButton();
+            console.log('입금 완료로 표시됨');
+        }
+        
+        function markAsNotPaid() {
+            paymentStatus = 'not-paid';
+            updatePaymentButtons();
+            updateNextButton();
+            console.log('입금 미완료로 표시됨');
+        }
+        
+        function updatePaymentButtons() {
+            const paidBtn = document.querySelector('.payment-btn.paid');
+            const notPaidBtn = document.querySelector('.payment-btn.not-paid');
+            
+            if (paymentStatus === 'paid') {
+                paidBtn.style.opacity = '1';
+                paidBtn.style.transform = 'scale(1.05)';
+                notPaidBtn.style.opacity = '0.6';
+                notPaidBtn.style.transform = 'scale(0.95)';
+            } else {
+                paidBtn.style.opacity = '0.6';
+                paidBtn.style.transform = 'scale(0.95)';
+                notPaidBtn.style.opacity = '1';
+                notPaidBtn.style.transform = 'scale(1.05)';
+            }
+        }
+        
+        function updateNextButton() {
+            const nextBtn = document.querySelector('.step-content[data-step="7"] .nav-btn.next');
+            if (nextBtn) {
+                if (paymentStatus === 'paid') {
+                    nextBtn.disabled = false;
+                } else {
+                    nextBtn.disabled = true;
+                }
+            }
+        }
+
+        // EmailJS로 이메일 전송 함수
+        async function sendEmailNotification(data) {
+            try {
+                console.log('📧 EmailJS 설정 확인:');
+                console.log('- Service ID:', EMAILJS_CONFIG.serviceId);
+                console.log('- Template ID:', EMAILJS_CONFIG.templateId);
+                console.log('- Public Key:', EMAILJS_CONFIG.publicKey);
+                
+                const templateParams = {
+                    userName: data.userName,
+                    userEmail: data.userEmail,
+                    userPhone: data.userPhone,
+                    propertyType: data.propertyType,
+                    additionalInfo: data.residenceStatus,
+                    detailStatus: data.detailStatus || '',
+                    depositAmount: formatNumberToKorean(data.amount),
+                    monthlyRent: data.monthlyRent > 0 ? formatNumberToKorean(data.monthlyRent) : '',
+                    contractPeriod: data.contractPeriod,
+                    address: data.address,
+                    trafficCode: data.trafficCode
+                };
+
+                console.log('📧 전송할 템플릿 파라미터:', templateParams);
+
+                const response = await emailjs.send(
+                    EMAILJS_CONFIG.serviceId,
+                    EMAILJS_CONFIG.templateId,
+                    templateParams
+                );
+
+                console.log('✅ 이메일 전송 성공:', response);
+                console.log('📊 응답 상태:', response.status);
+                console.log('📊 응답 텍스트:', response.text);
+                return true;
+            } catch (error) {
+                console.error('❌ 이메일 전송 실패:', error);
+                console.error('❌ 에러 상세:', {
+                    status: error.status,
+                    text: error.text,
+                    message: error.message
+                });
+                return false;
+            }
+        }
+
+        // Google Sheets에 데이터 전송 함수
+        async function sendDataToGoogleSheets(data) {
+            try {
+                console.log('📊 Google Sheets 설정 확인:');
+                console.log('- Script URL:', GOOGLE_SHEETS_CONFIG.scriptUrl);
+                console.log('- Sheet Name:', GOOGLE_SHEETS_CONFIG.sheetName);
+                
+                const requestData = {
+                    ...data,
+                    timestamp: new Date().toISOString()
+                };
+                
+                console.log('📊 전송할 데이터:', requestData);
+
+                // JSONP 방식으로 CORS 우회
+                const params = new URLSearchParams();
+                Object.keys(requestData).forEach(key => {
+                    params.append(key, requestData[key]);
+                });
+
+                const jsonpUrl = `${GOOGLE_SHEETS_CONFIG.scriptUrl}?${params.toString()}`;
+                console.log('📊 JSONP URL:', jsonpUrl);
+
+                // JSONP 방식으로 GET 요청 (CORS 우회)
+                const response = await fetch(jsonpUrl, {
+                    method: 'GET',
+                    mode: 'no-cors' // CORS 우회
+                });
+
+                console.log('📊 응답 상태:', response.status);
+                
+                // no-cors 모드에서는 응답을 읽을 수 없지만, 요청은 전송됨
+                console.log('✅ Google Sheets 데이터 전송 완료 (JSONP 모드)');
+                return true;
+            } catch (error) {
+                console.error('❌ Google Sheets 전송 오류:', error);
+                console.error('❌ 에러 상세:', {
+                    message: error.message,
+                    stack: error.stack
+                });
+                return false;
+            }
+        }
+
+    </script>
+</body>
+</html>
