@@ -175,8 +175,6 @@ tr:nth-child(3) .info-value {
     padding: 0.5rem 0.3rem;
     max-width: 100%;
 }
-
-
 /* 마지막 행 스타일 - 구분선이 없으므로 불필요 */
 
 /* 호버 효과 */
@@ -269,10 +267,6 @@ tr:hover .info-value {
     padding: 1rem;
     flex: 1;
 }
-
-
-
-
 
 /* 푸터 */
 .report-footer {
@@ -665,34 +659,6 @@ tr:hover .info-value {
     gap: 1rem;
 }
 
-
-.analysis-title {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #1e40af;
-    margin-bottom: 0.5rem;
-}
-
-.analysis-desc {
-    font-size: 0.85rem;
-    color: #374151;
-    line-height: 1.4;
-}
-
-/* 위험 분석 스타일 */
-.risk-analysis {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.risk-item {
-    padding: 1rem;
-    background: #ffffff;
-    border-radius: 8px;
-    border: 1px solid #e5e7eb;
-}
-
 .risk-title {
     font-size: 0.9rem;
     font-weight: 700;
@@ -922,8 +888,6 @@ tr:hover .info-value {
     background: #eff6ff;
     border-bottom: 3px solid #1e40af;
 }
-
-
 /* 섹션 숨김/표시 */
 .section-content {
     display: none;
@@ -982,8 +946,6 @@ tr:hover .info-value {
     border: 1px solid #f3f4f6;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-
 .report-content .status-card.safe {
     border-color: #e5e7eb;
     background: #ffffff;
@@ -1014,8 +976,6 @@ tr:hover .info-value {
     margin-bottom: 1.25rem;
     position: relative;
 }
-
-
 .status-header-with-button {
     display: flex;
     align-items: center;
@@ -1024,16 +984,12 @@ tr:hover .info-value {
     margin-bottom: 1.25rem;
     position: relative;
 }
-
-
 .status-info {
     display: flex;
     align-items: flex-start;
     gap: 1.25rem;
     flex: 1;
 }
-
-
 .detail-button {
     background: #ef4444;
     color: white;
@@ -1047,8 +1003,6 @@ tr:hover .info-value {
     white-space: nowrap;
     box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
 }
-
-
 .detail-button:hover {
     background: #dc2626;
     transform: translateY(-1px);
@@ -1081,8 +1035,6 @@ tr:hover .info-value {
     flex-shrink: 0;
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
-
-
 .report-content .status-icon.safe {
     background: transparent;
     color: #6b7280;
@@ -1107,8 +1059,6 @@ tr:hover .info-value {
     line-height: 1.2;
     letter-spacing: -0.02em;
 }
-
-
 .report-content .status-description {
     font-size: 0.9rem;
     color: #6b7280;
@@ -1117,8 +1067,6 @@ tr:hover .info-value {
     font-weight: 500;
     letter-spacing: -0.01em;
 }
-
-
 .report-content .risk-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -1214,8 +1162,6 @@ tr:hover .info-value {
     border-radius: 6px;
     display: inline-block;
 }
-
-
 /* 보험 & 대출 섹션 스타일 */
 .insurance-loan-section {
     margin-bottom: 0.8rem;
@@ -1307,8 +1253,6 @@ tr:hover .info-value {
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     border-color: #1e40af;
 }
-
-
 .info-value.success {
     color: #047857;
     background: #d1fae5;
@@ -1333,8 +1277,6 @@ tr:hover .info-value {
     display: inline-block;
 }
 
-
-
 /* 점수 분석 스타일 */
 .score-analysis {
     background: white;
@@ -1343,15 +1285,6 @@ tr:hover .info-value {
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     margin-bottom: 2rem;
 }
-
-.analysis-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #1e40af;
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-
 /* 세부 분석 그리드 */
 .analysis-grid {
     display: grid;
@@ -1419,13 +1352,6 @@ tr:hover .info-value {
     color: #1e40af;
     letter-spacing: -0.01em;
 }
-
-.analysis-description {
-    font-size: 0.75rem;
-    color: #6b7280;
-    font-weight: 500;
-}
-
 /* 점수 시각화 스타일 */
 .score-visualization {
     display: flex;
@@ -1554,10 +1480,6 @@ tr:hover .info-value {
     margin: 0;
 }
 
-
-
-
-
 /* 문서 검증 그리드 스타일 */
 .verification-grid {
     display: grid;
@@ -1653,4 +1575,200 @@ tr:hover .info-value {
     padding: 0.25rem 0.5rem;
     border-radius: 6px;
     display: inline-block;
+}
+
+/* ========================================
+   전세사기 종류 섹션 스타일
+   ======================================== */
+
+.fraud-section {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 1px solid #e5e7eb;
+}
+
+.fraud-section-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #dc2626;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.fraud-section-desc {
+    font-size: 0.9rem;
+    color: #6b7280;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.fraud-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.fraud-card {
+    background: #ffffff;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.fraud-card:hover {
+    border-color: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
+}
+
+.fraud-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.fraud-card:hover::before {
+    left: 100%;
+}
+
+.fraud-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.fraud-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.5rem;
+}
+
+.fraud-desc {
+    font-size: 0.85rem;
+    color: #6b7280;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* ========================================
+   전세사기 상세 정보 스타일
+   ======================================== */
+
+.fraud-detail-content {
+    padding: 1rem 0;
+}
+
+.fraud-summary,
+.fraud-methods,
+.fraud-prevention {
+    margin-bottom: 1.5rem;
+}
+
+.fraud-summary:last-child,
+.fraud-methods:last-child,
+.fraud-prevention:last-child {
+    margin-bottom: 0;
+}
+
+.detail-subtitle {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.summary-text {
+    font-size: 0.9rem;
+    color: #374151;
+    line-height: 1.6;
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #3b82f6;
+    margin: 0;
+}
+
+.methods-list,
+.prevention-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.method-item,
+.prevention-item {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f3f4f6;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.method-item:last-child,
+.prevention-item:last-child {
+    border-bottom: none;
+}
+
+.method-item::before {
+    content: '⚠️';
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+}
+
+.prevention-item::before {
+    content: '✅';
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+}
+
+.method-item {
+    color: #dc2626;
+}
+
+.prevention-item {
+    color: #059669;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    .fraud-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+    
+    .fraud-card {
+        padding: 1rem;
+    }
+    
+    .fraud-icon {
+        font-size: 2rem;
+    }
+    
+    .fraud-title {
+        font-size: 1rem;
+    }
+    
+    .fraud-desc {
+        font-size: 0.8rem;
+    }
 }

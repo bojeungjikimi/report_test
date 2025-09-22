@@ -15,8 +15,6 @@
                 <h3 class="company-name">보증지킴이</h3>
             </div>
         </div>
-
-
         <!-- 고객 개인화 정보 -->
         <div class="customer-info-section section-content active" id="customer-section">
             <div class="customer-header">
@@ -77,8 +75,6 @@
                         </tbody>
                     </table>
                 </div>
-
-
 
                 <!-- 종합 분석 결과 -->
                 <div class="score-analysis">
@@ -149,15 +145,23 @@
                 </div>
 
                 <!-- 등기부등본 관련 정보 카드 -->
-                <div class="status-card safe">
-                    <div class="status-header">
-                        <div class="status-icon safe">📋</div>
-                        <div>
-                            <h3 class="status-title">등기부등본</h3>
-                            <p class="status-description">소유권 및 권리 관계 확인</p>
+                <div class="status-card safe collapsible" id="registry-card">
+                    <div class="status-header-with-button" onclick="toggleCard('registry-card')">
+                        <div class="status-info">
+                            <div class="status-icon safe">📋</div>
+                            <div>
+                                <h3 class="status-title">등기부등본</h3>
+                                <p class="status-description">소유권 및 권리 관계 확인</p>
+                            </div>
+                        </div>
+                        <div class="card-status-indicator">
+                            <span class="status-badge safe">이상없음</span>
+                            <button class="collapse-button" type="button">
+                                <span class="collapse-icon">▼</span>
+                            </button>
                         </div>
                     </div>
-                    <div class="verification-grid">
+                    <div class="verification-grid collapsible-content">
                         <div class="verification-item no-risk">
                             <div class="verification-icon no-risk">OK</div>
                             <div class="verification-content">
@@ -336,14 +340,14 @@
                 </div>
 
                 <!-- 전세사기 유형별 분석 -->
-                <div class="status-card warning" id="scenario-fraud-card" style="display: none;">
+                <div class="status-card danger" id="scenario-fraud-card" style="display: none;">
                     <div class="status-header-with-button">
                         <div class="status-info">
-                            <div class="status-icon warning">💡</div>
-                        <div>
-                                <h3 class="status-title">전세사기</h3>
-                                <p class="status-description">이런 전세사기들이 있어요</p>
-                        </div>
+                            <div class="status-icon danger">🚨</div>
+                            <div>
+                                <h3 class="status-title">전세사기 종류</h3>
+                                <p class="status-description">다양한 전세사기 유형과 예방법을 확인하세요</p>
+                            </div>
                         </div>
                         <button class="detail-button" onclick="toggleDetailFooter('fraud')">상세보기</button>
                     </div>
@@ -436,6 +440,122 @@
     </div>
 
     <script>
+        /**
+         * ========================================
+         * 전세사기 정보 상세 데이터
+         * ========================================
+         */
+        const fraudData = {
+            'kkangtong': {
+                title: '깡통전세 및 무자본 갭투자',
+                summary: '전세보증금이 매매가를 초과하여 계약 만료 시 보증금 회수가 불가능한 계약입니다. 건축주가 보증금으로 매매 잔금을 치르고, 실제 임대인은 \'바지 임대인\'에게 소유권을 이전하는 구조적 사기입니다.',
+                methods: [
+                    '시세 정보가 불분명한 신축 빌라를 표적으로 삼음',
+                    '건축주와 결탁하여 매매가와 비슷한 수준으로 전세보증금 책정',
+                    '보증금으로 주택 매매 잔금을 치르고, \'바지 임대인\'에게 소유권 이전',
+                    '임대인은 실제로는 소유권이 없는 상태에서 전세 계약 체결',
+                    '계약 만료 시 보증금 회수가 불가능한 구조적 사기'
+                ],
+                prevention: [
+                    '안심전세앱/실거래가 사이트를 통한 정확한 시세 확인',
+                    '전세가율 80% 이하인 주택 계약',
+                    'HUG 보증보험 가입 가능 여부 사전 확인',
+                    '임대인의 부동산 등기부등본 확인',
+                    '신축 빌라의 경우 건축주와 임대인이 다른지 확인'
+                ]
+            },
+            'fakeLandlord': {
+                title: '가짜 임대인 및 무권한 대리 계약',
+                summary: '실제 소유자가 아닌 사람이 임대인을 사칭하거나, 대리인 자격이 없는 사람이 계약을 체결하는 사기입니다. 계약 자체가 무효가 되어 보증금 회수가 어려워집니다.',
+                methods: [
+                    '실제 소유자가 아닌 사람이 임대인을 사칭',
+                    '대리인 자격이 없는 사람이 계약 체결',
+                    '위조된 위임장이나 대리인 자격 증명서 사용',
+                    '소유권 이전 과정에서 발생하는 권리 공백기 이용',
+                    '계약서에 실제 소유자와 다른 이름으로 서명'
+                ],
+                prevention: [
+                    '부동산 등기부등본을 통한 실제 소유자 확인',
+                    '임대인의 신분증과 등기부등본의 성명 일치 여부 확인',
+                    '대리 계약 시 위임장의 유효성 검증',
+                    '공인중개사를 통한 계약 체결',
+                    '계약 전 임대인과의 직접 대면 확인'
+                ]
+            },
+            'doubleContract': {
+                title: '이중 계약 및 권리 분쟁',
+                summary: '동일한 부동산에 대해 여러 명의 임차인과 계약을 체결하거나, 이미 다른 사람과 계약이 체결된 상태에서 추가 계약을 맺는 사기입니다.',
+                methods: [
+                    '동일한 부동산에 여러 명의 임차인과 계약 체결',
+                    '이미 계약된 상태에서 추가 계약 체결',
+                    '계약서 날짜를 조작하여 선후 관계 모호화',
+                    '임차인들 간의 정보 차단으로 이중 계약 은폐',
+                    '실제 입주 가능한 사람은 한 명뿐인 상황 조성'
+                ],
+                prevention: [
+                    '부동산 등기부등본의 전세권 설정 여부 확인',
+                    '공인중개사를 통한 계약 체결',
+                    '계약 전 해당 부동산의 입주 가능 여부 확인',
+                    '임대인과의 직접적인 소통 채널 확보',
+                    '계약서 작성 시 정확한 날짜와 시간 기록'
+                ]
+            },
+            'fakeDocument': {
+                title: '위조 서류 및 허위 정보 제공',
+                summary: '부동산 관련 서류를 위조하거나 허위 정보를 제공하여 계약을 유도하는 사기입니다. 등기부등본, 건축물대장, 임대차계약서 등을 위조합니다.',
+                methods: [
+                    '부동산 등기부등본 위조',
+                    '건축물대장 및 관련 허가서류 위조',
+                    '임대차계약서의 중요 조항 위조',
+                    '소유권 증명서류 위조',
+                    '허위의 부동산 정보 제공'
+                ],
+                prevention: [
+                    '정부24, 부동산등기부등본 열람 서비스 이용',
+                    '공인중개사를 통한 서류 검증',
+                    '여러 채널을 통한 정보 교차 확인',
+                    '계약 전 모든 서류의 원본 확인',
+                    '의심스러운 서류 발견 시 계약 중단'
+                ]
+            },
+            'depositFraud': {
+                title: '보증금 사취 및 도피',
+                summary: '보증금을 받은 후 계약을 이행하지 않고 도피하거나, 보증금을 다른 용도로 사용하여 반환하지 않는 사기입니다.',
+                methods: [
+                    '보증금 수령 후 계약 이행 거부',
+                    '보증금을 다른 부동산 매입 자금으로 사용',
+                    '계약 기간 중 갑작스러운 연락 두절',
+                    '보증금 반환 약속 후 계속적인 지연',
+                    '법적 절차를 통한 보증금 회수 방해'
+                ],
+                prevention: [
+                    'HUG 보증보험 가입 필수',
+                    '보증금을 직접 전달하지 말고 공인중개사 경유',
+                    '계약 전 임대인의 신용도 조회',
+                    '보증금 반환 조건을 계약서에 명시',
+                    '정기적인 임대인과의 소통 유지'
+                ]
+            },
+            'evictionFraud': {
+                title: '강제 퇴거 및 불법 해지',
+                summary: '계약 기간 중 임대인의 일방적인 계약 해지나 강제 퇴거를 시도하는 사기입니다. 법적 근거 없이 임차인을 내쫓으려 합니다.',
+                methods: [
+                    '계약 기간 중 일방적인 계약 해지 통보',
+                    '법적 근거 없는 강제 퇴거 시도',
+                    '임차인의 정상적인 거주를 방해하는 행위',
+                    '계약서에 불리한 조항을 이용한 해지',
+                    '임차인을 협박하여 자발적 퇴거 유도'
+                ],
+                prevention: [
+                    '계약서의 해지 조건을 명확히 확인',
+                    '임차인의 권리에 대한 법적 지식 습득',
+                    '퇴거 요구 시 법적 근거 요구',
+                    '공인중개사나 법무법인 상담',
+                    '모든 소통 내용을 기록으로 남기기'
+                ]
+            }
+        };
+
         /**
          * ========================================
          * 부동산 안전성 검증 보고서 데이터 설정 함수
@@ -721,8 +841,6 @@
                 }
             });
         }
-
-
         // 섹션 전환 함수
         function showSection(sectionId) {
             // 모든 섹션 숨기기
@@ -930,50 +1048,92 @@
                     </div>
                 `;
             } else if (type === 'fraud') {
-                title.textContent = '전세사기 유형별 분석';
+                title.textContent = '전세사기 종류';
                 content.innerHTML = `
-                    <div class="scenario-analysis">
-                        <div class="analysis-item">
-                            <div class="analysis-title">🏠 중복 임대 사기</div>
-                            <div class="analysis-desc">같은 집을 여러 명에게 임대하고 보증금만 받고 도피하는 사기</div>
-                        </div>
-                        <div class="analysis-item">
-                            <div class="analysis-title">💰 가짜 소유자 사기</div>
-                            <div class="analysis-desc">실제 소유자가 아닌 사람이 집을 임대하고 보증금을 받는 사기</div>
-                        </div>
-                        <div class="analysis-item">
-                            <div class="analysis-title">📋 불법 증축 숨김</div>
-                            <div class="analysis-desc">불법 증축된 부분을 숨기고 계약 후 철거 요구하는 사기</div>
-                        </div>
-                        <div class="analysis-item">
-                            <div class="analysis-title">⚖️ 용도 위반 숨김</div>
-                            <div class="analysis-desc">상업용 건물을 주거용으로 위장하여 임대하는 사기</div>
-                        </div>
-                    </div>
-                    
-                    <div class="detail-section">
-                        <h4 class="detail-section-title">검토해야 할 사항들</h4>
-                        <div class="response-measures">
-                            <div class="measure-item">
-                                <div class="measure-title">📋 등기부등본 확인</div>
-                                <div class="measure-desc">소유자 확인, 근저당권, 전세권 등 모든 권리 관계 점검</div>
+                    <div class="fraud-section">
+                        <p class="fraud-section-desc">각 사기 유형을 클릭하여 상세 정보를 확인하세요</p>
+                        
+                        <div class="fraud-cards-grid">
+                            <div class="fraud-card" onclick="showFraudDetail('kkangtong')">
+                                <div class="fraud-icon">🏠</div>
+                                <h4 class="fraud-title">깡통전세</h4>
+                                <p class="fraud-desc">전세가가 매매가를 초과하는 사기</p>
                             </div>
-                            <div class="measure-item">
-                                <div class="measure-title">🏠 건물 상태 확인</div>
-                                <div class="measure-desc">불법 증축, 용도 위반, 안전진단 이력 등 건물 상태 점검</div>
+                            
+                            <div class="fraud-card" onclick="showFraudDetail('fakeLandlord')">
+                                <div class="fraud-icon">👤</div>
+                                <h4 class="fraud-title">가짜 임대인</h4>
+                                <p class="fraud-desc">실제 소유자가 아닌 사람의 사기</p>
                             </div>
-                            <div class="measure-item">
-                                <div class="measure-title">👤 집주인 신원 확인</div>
-                                <div class="measure-desc">신분증 확인, 연락처 검증, 다른 부동산 거래 이력 조사</div>
+                            
+                            <div class="fraud-card" onclick="showFraudDetail('doubleContract')">
+                                <div class="fraud-icon">📋</div>
+                                <h4 class="fraud-title">이중 계약</h4>
+                                <p class="fraud-desc">여러 명과 동시에 계약하는 사기</p>
                             </div>
-                            <div class="measure-item">
-                                <div class="measure-title">💰 시세 비교 분석</div>
-                                <div class="measure-desc">주변 시세와 비교하여 비정상적으로 저렴한지 확인</div>
+                            
+                            <div class="fraud-card" onclick="showFraudDetail('fakeDocument')">
+                                <div class="fraud-icon">📄</div>
+                                <h4 class="fraud-title">위조 서류</h4>
+                                <p class="fraud-desc">부동산 서류를 위조하는 사기</p>
+                            </div>
+                            
+                            <div class="fraud-card" onclick="showFraudDetail('depositFraud')">
+                                <div class="fraud-icon">💰</div>
+                                <h4 class="fraud-title">보증금 사취</h4>
+                                <p class="fraud-desc">보증금을 받고 도피하는 사기</p>
+                            </div>
+                            
+                            <div class="fraud-card" onclick="showFraudDetail('evictionFraud')">
+                                <div class="fraud-icon">🚪</div>
+                                <h4 class="fraud-title">강제 퇴거</h4>
+                                <p class="fraud-desc">법적 근거 없이 내쫓는 사기</p>
                             </div>
                         </div>
                     </div>
                 `;
             }
+            
+            footer.classList.add('active');
+        }
+
+        // 전세사기 상세 정보 표시 함수
+        function showFraudDetail(fraudId) {
+            const footer = document.getElementById('detail-footer');
+            const title = document.getElementById('detail-title');
+            const content = document.getElementById('detail-content');
+            
+            const fraudInfo = fraudData[fraudId];
+            if (!fraudInfo) {
+                console.error('전세사기 정보를 찾을 수 없습니다:', fraudId);
+                return;
+            }
+            
+            title.textContent = fraudInfo.title;
+            
+            // 상세 정보 HTML 생성
+            content.innerHTML = `
+                <div class="fraud-detail-content">
+                    <div class="fraud-summary">
+                        <h4 class="detail-subtitle">📋 개요</h4>
+                        <p class="summary-text">${fraudInfo.summary}</p>
+                    </div>
+                    
+                    <div class="fraud-methods">
+                        <h4 class="detail-subtitle">🚨 주요 수법</h4>
+                        <ul class="methods-list">
+                            ${fraudInfo.methods.map(method => `<li class="method-item">${method}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="fraud-prevention">
+                        <h4 class="detail-subtitle">✅ 핵심 예방법</h4>
+                        <ul class="prevention-list">
+                            ${fraudInfo.prevention.map(prevention => `<li class="prevention-item">${prevention}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
             
             footer.classList.add('active');
         }

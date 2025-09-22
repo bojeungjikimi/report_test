@@ -30,7 +30,7 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>🏠 전세사기 걱정 끝!<br>보증지킴이로 안전하게</h1>
+                <h1>전세사기 걱정 끝!<br>보증지킴이로 안전하게</h1>
                 
                 <!-- 말풍선 대화 섹션 -->
                 <div class="conversation-section">
@@ -40,7 +40,6 @@
                     </div>
                     
                     <div class="speech-bubble solution">
-                            <div class="speaker">💡 친구</div>
                             <div class="message">"보증지킴이로 미리 확인하세요!"</div>
                     </div>
                 </div>
@@ -171,9 +170,6 @@
             <p style="text-align: center; color: #718096; margin-bottom: 2rem; font-size: 0.9rem;">꼼꼼한 검증으로 빠른 확인</p>
             
             <!-- 단계별 안내 -->
-            <div class="scroll-indicator">
-                각 단계를 클릭하여 자세한 내용을 확인해보세요
-                </div>
             
             <!-- 단계별 체크 과정 -->
             <div class="steps-container">
@@ -186,7 +182,7 @@
                     <div class="step-content">
                         <div class="step-icon">🔍</div>
                         <div class="step-description">
-                            <p>집주인의 부채, 압류 등 재정 위험 요소를 분석</p>
+                            <p>집주인의 부채, 압류 등 <br> 재정 위험 요소를 분석</p>
                             
                             <div class="analysis-items">
                                 <div class="analysis-grid">
@@ -258,7 +254,7 @@
                     <div class="step-content">
                         <div class="step-icon">📋</div>
                         <div class="step-description">
-                            <p>불법 건물, 용도 위반, 안전진단 등 법적 위험 요소 분석</p>
+                            <p>불법 건물, 용도 위반, 안전진단 등 <br> 법적 위험 요소 분석</p>
                             
                             <div class="analysis-items">
                                 <div class="analysis-grid">
@@ -360,7 +356,7 @@
             
             <!-- 리포트 미리보기 섹션 -->
             <div class="report-preview-section">
-                <p class="preview-subtitle">상세한 분석 리포트를 미리 확인해보세요!</p>
+                <p class="preview-subtitle">상세한 리포트를 미리 확인해보세요!</p>
                 
                 <!-- 리포트 미리보기 카드 -->
                 <div class="report-preview-card">
@@ -466,7 +462,7 @@
             
                     <!-- 보험 & 대출 정보 -->
                     <div class="preview-insurance-section">
-                        <h4 class="preview-insurance-title">🛡️ 임대차보증금 반환보증보험</h4>
+                        <h4 class="preview-insurance-title">임대차보증금 반환보증보험</h4>
                         <div class="preview-insurance-grid">
                             <div class="preview-insurance-item">
                                 <span class="preview-insurance-label">가입 가능 여부</span>
@@ -490,30 +486,39 @@
                     <!-- 경매 분석 섹션 -->
                     <div class="preview-auction-section">
                         <h4 class="preview-auction-title">⚖️ 경매 위험 분석</h4>
-                        <div class="preview-auction-grid">
-                            <div class="preview-auction-item">
-                                <div class="preview-auction-content">
-                                    <div class="preview-auction-label">손실 확률</div>
-                                    <div class="preview-auction-value danger">??%</div>
-                                </div>
+                        
+                        <!-- 상단 주요 금액 정보 -->
+                        <div class="auction-main-info">
+                            <div class="auction-info-row">
+                                <span class="auction-info-label">예상낙찰금</span>
+                                <div class="auction-info-separator separator-bid"></div>
+                                <div class="auction-info-value positive">??억원</div>
                             </div>
-                            <div class="preview-auction-item">
-                                <div class="preview-auction-content">
-                                    <div class="preview-auction-label">예상 손실액</div>
-                                    <div class="preview-auction-value">??억원</div>
-                                </div>
+                            <div class="auction-info-row">
+                                <span class="auction-info-label">근저당권</span>
+                                <div class="auction-info-separator separator-mortgage"></div>
+                                <div class="auction-info-value positive">??만원</div>
                             </div>
-                            <div class="preview-auction-item">
-                                <div class="preview-auction-content">
-                                    <div class="preview-auction-label">경매 가능성</div>
-                                    <div class="preview-auction-value warning">??%</div>
-                                </div>
+                            <div class="auction-info-row">
+                                <span class="auction-info-label">전세권</span>
+                                <div class="auction-info-separator separator-jeonse"></div>
+                                <div class="auction-info-value positive">??만원</div>
                             </div>
-                            <div class="preview-auction-item">
-                                <div class="preview-auction-content">
-                                    <div class="preview-auction-label">예상 기간</div>
-                                    <div class="preview-auction-value">??개월</div>
-                                </div>
+                        </div>
+                        
+                        <!-- 하단 요약 정보 -->
+                        <div class="auction-summary">
+                            <div class="auction-summary-row">
+                                <span class="auction-summary-label">보증금 회수 가능 금액</span>
+                                <div class="auction-summary-value positive">최대 ??만원</div>
+                            </div>
+                            <div class="auction-summary-row">
+                                <span class="auction-summary-label">손실 가능 금액</span>
+                                <div class="auction-summary-value negative">최소 ??만원</div>
+                            </div>
+                            <div class="auction-summary-row">
+                                <span class="auction-summary-label">손실 확률</span>
+                                <div class="auction-summary-value warning">약 ??%</div>
                             </div>
                         </div>
                     </div>
@@ -580,7 +585,7 @@
                 
                 <!-- 미리보기 안내 -->
                 <div class="preview-notice">
-                    <p>💡 <strong>실제 리포트는</strong> 위와 같은 형태로 상세한 분석 결과와 함께 제공됩니다.</p>
+                    <p>💡 <strong>실제 리포트는</strong>상세한 분석 결과와 함께 제공됩니다.</p>
                     <p>📧 <strong>이메일로 발송</strong>되며, 언제든지 다시 확인하실 수 있습니다.</p>
                 </div>
                 
@@ -598,7 +603,7 @@
     <!-- 3단계: 신뢰단계 - Trust Section -->
     <section id="trust" class="trust-section">
         <div class="container">
-            <h2 class="section-title">🏆 신뢰받는 서비스</h2>
+            <h2 class="section-title">신뢰받는 서비스</h2>
             <p style="color: #718096; margin-bottom: 2rem;">안전하고 신뢰할 수 있는 서비스</p>
             
             <!-- 신뢰 배지 -->
@@ -659,8 +664,6 @@
             </div>
         </div>
     </section>
-
-
     <!-- 3단계: 신뢰단계 - Testimonials Section -->
     <section class="testimonials">
         <div class="container">
@@ -776,7 +779,7 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        <p>네, 가능합니다! 전세사기 피해는 수백만원부터 수억원까지 다양한데, 미리 검증해서 위험한 매물을 피하면 그 피해를 예방할 수 있어요. 5,900원으로 소중한 보증금을 지키는 것이죠.</p>
+                        <p>네, 가능합니다! 전세사기 피해는 수백만원부터 수억원까지 다양한데, 미리 검증해서 위험한 매물을 피하면 그 피해를 예방할 수 있어요. 6,900원으로 소중한 보증금을 지키는 것이죠.</p>
                     </div>
                 </div>
                 
@@ -2015,12 +2018,6 @@
             }
         }
 
-
-
-
-
-
-
         // DOM 로드 시 모든 초기화 작업
         document.addEventListener('DOMContentLoaded', () => {
             
@@ -2120,9 +2117,80 @@
                 });
             });
             
+            // 점수에 따른 색상 계산 함수 (range-fill 그라데이션과 정확히 일치)
+            const getScoreColor = (score) => {
+                // range-fill의 그라데이션: linear-gradient(90deg, #dc2626 0%, #f59e0b 50%, #10b981 100%)
+                // 0-30: 빨간색 (#dc2626)
+                // 31-60: 주황색 (#f59e0b) 
+                // 61-100: 초록색 (#10b981)
+                
+                if (score >= 0 && score <= 30) {
+                    return '#dc2626'; // 위험 - 빨간색
+                } else if (score >= 31 && score <= 60) {
+                    return '#f59e0b'; // 주의 - 주황색
+                } else if (score >= 61 && score <= 100) {
+                    return '#10b981'; // 보통/안전 - 초록색
+                }
+                return '#10b981'; // 기본값
+            };
+
+            // Range-fill 애니메이션 트리거
+            const rangeFillObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const rangeFill = entry.target.querySelector('.range-fill');
+                        const scoreCircle = document.querySelector('.score-circle');
+                        
+                        if (rangeFill) {
+                            // 약간의 지연 후 애니메이션 시작 (모바일 호환성)
+                            setTimeout(() => {
+                                rangeFill.classList.add('animate');
+                                
+                                // score-circle 색상 업데이트
+                                if (scoreCircle) {
+                                    const currentScore = 85; // 현재 점수
+                                    const scoreColor = getScoreColor(currentScore);
+                                    
+                                    // score-circle 배경색 업데이트 (부드러운 그라데이션)
+                                    scoreCircle.style.background = `linear-gradient(135deg, ${scoreColor}20, ${scoreColor}10, white)`;
+                                    scoreCircle.style.borderColor = scoreColor;
+                                    scoreCircle.style.boxShadow = `0 8px 25px ${scoreColor}30, 0 0 0 1px ${scoreColor}20`;
+                                    
+                                    // score-circle::before 요소도 업데이트 (외곽 글로우 효과)
+                                    const style = document.createElement('style');
+                                    style.id = 'score-circle-dynamic-style';
+                                    style.textContent = `
+                                        .score-circle::before {
+                                            background: radial-gradient(circle, ${scoreColor}30 0%, ${scoreColor}10 50%, transparent 100%) !important;
+                                            opacity: 0.8 !important;
+                                        }
+                                    `;
+                                    // 기존 동적 스타일 제거 후 새로 추가
+                                    const existingStyle = document.getElementById('score-circle-dynamic-style');
+                                    if (existingStyle) {
+                                        existingStyle.remove();
+                                    }
+                                    document.head.appendChild(style);
+                                }
+                            }, 300);
+                        }
+                        rangeFillObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.3, // 30% 보일 때 트리거
+                rootMargin: '0px 0px -50px 0px' // 하단에서 50px 전에 트리거
+            });
+            
             counterNumbers.forEach(counter => {
                 counterObserver.observe(counter);
             });
+            
+            // Range-fill 애니메이션을 위한 섹션 관찰
+            const scoreAnalysisSection = document.querySelector('.score-analysis');
+            if (scoreAnalysisSection) {
+                rangeFillObserver.observe(scoreAnalysisSection);
+            }
             
             // 걱정 말풍선 클릭 기능 (선택사항)
             const worryBubbles = document.querySelectorAll('.worry-bubble');
