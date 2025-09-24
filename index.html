@@ -7,8 +7,26 @@
     <link rel="stylesheet" href="css/index-styles.css">
     <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1330722015430909');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1330722015430909&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
 </head>
-<body>
+<body class="fixed-width">
     <!-- 상단바 -->
     <header class="top-bar">
         <div class="container">
@@ -18,7 +36,7 @@
                     <span class="logo-text">보증지킴이</span>
                 </div>
                 <div class="top-bar-actions">
-                    <button class="top-bar-btn" onclick="openModal()">
+                    <button class="top-bar-btn" onclick="trackPopupClick('header_cta', 'cta_button', 'open'); openModal();">
                         바로 신청하기
                     </button>
                 </div>
@@ -73,7 +91,7 @@
                     </div>
                 </div>
                 
-                <button class="cta-button" id="hero-cta" onclick="scrollToSection('problem-solution')">
+                <button class="cta-button" id="hero-cta" onclick="trackPopupClick('hero_cta', 'cta_button', 'open'); scrollToSection('problem-solution');">
                     지금 체크해보기!
                 </button>
             </div>
@@ -478,7 +496,7 @@
                         </div>
                             <div class="preview-insurance-item">
                                 <span class="preview-insurance-label">추천 보험사</span>
-                                <span class="preview-insurance-value">??손해보험, ??해상</span>
+                                <span class="preview-insurance-value">??손해보험,<br>??해상</span>
                     </div>
                         </div>
                     </div>
@@ -591,7 +609,7 @@
                 
                 <!-- 바로 신청하기 버튼 -->
                 <div class="preview-cta">
-                    <button class="cta-button" onclick="scrollToSection('purchase')">
+                    <button class="cta-button" onclick="trackPopupClick('middle_cta', 'cta_button', 'open'); scrollToSection('purchase');">
                         바로 신청하기! 🚀
                     </button>
                     <p class="preview-cta-subtitle">지금 바로 안전성 검증을 신청하세요</p>
@@ -903,7 +921,7 @@
                 <p class="final-cta-desc">보증지킴이와 함께 안전한 계약 시작해요!</p>
                 
                 
-            <button class="cta-button" onclick="openModal()">
+            <button class="cta-button" onclick="trackPopupClick('final_cta', 'cta_button', 'open'); openModal();">
                 지금 체크해보기!
             </button>
             </div>
@@ -1178,11 +1196,11 @@
                             <div class="bank-info">
                                 <div class="bank-detail">
                                     <span class="bank-label">입금계좌:</span>
-                                    <span class="bank-account">국민은행 123-456-789012</span>
+                                    <span class="bank-account">토스뱅크 1001-3455-6544</span>
                                 </div>
                                 <div class="bank-detail">
                                     <span class="bank-label">예금주:</span>
-                                    <span class="bank-holder">보증지킴이</span>
+                                    <span class="bank-holder">김건희</span>
                                 </div>
                             </div>
                         </div>
@@ -1209,6 +1227,212 @@
         </div>
     </div>
 
+    <!-- 팝업 클릭율 및 광고비 대비 수익률 측정을 위한 추적 코드 -->
+    <script>
+        /**
+         * ========================================
+         * 팝업 클릭율 및 광고비 대비 수익률 측정 시스템
+         * ========================================
+         */
+        
+        // 추적 데이터 저장소
+        const trackingData = {
+            popupClicks: {},
+            adRevenue: {},
+            userSessions: [],
+            conversionEvents: []
+        };
+
+        // 팝업 클릭 추적 함수
+        function trackPopupClick(popupId, popupType, action) {
+            const timestamp = new Date().toISOString();
+            const sessionId = getSessionId();
+            
+            const clickData = {
+                sessionId: sessionId,
+                popupId: popupId,
+                popupType: popupType,
+                action: action, // 'open', 'close', 'interact'
+                timestamp: timestamp,
+                userAgent: navigator.userAgent,
+                referrer: document.referrer,
+                url: window.location.href
+            };
+
+            // 로컬 저장소에 저장
+            if (!trackingData.popupClicks[popupId]) {
+                trackingData.popupClicks[popupId] = [];
+            }
+            trackingData.popupClicks[popupId].push(clickData);
+
+            // 서버로 전송 (실제 구현 시)
+            sendTrackingData('popup_click', clickData);
+            
+            console.log('팝업 클릭 추적:', clickData);
+        }
+
+        // 광고 수익 추적 함수
+        function trackAdRevenue(adId, adType, revenue, currency = 'KRW') {
+            const timestamp = new Date().toISOString();
+            const sessionId = getSessionId();
+            
+            const revenueData = {
+                sessionId: sessionId,
+                adId: adId,
+                adType: adType,
+                revenue: revenue,
+                currency: currency,
+                timestamp: timestamp,
+                userAgent: navigator.userAgent,
+                referrer: document.referrer,
+                url: window.location.href
+            };
+
+            // 로컬 저장소에 저장
+            if (!trackingData.adRevenue[adId]) {
+                trackingData.adRevenue[adId] = [];
+            }
+            trackingData.adRevenue[adId].push(revenueData);
+
+            // 서버로 전송
+            sendTrackingData('ad_revenue', revenueData);
+            
+            console.log('광고 수익 추적:', revenueData);
+        }
+
+        // 전환 이벤트 추적 (보고서 생성, 다운로드 등)
+        function trackConversionEvent(eventType, eventValue, metadata = {}) {
+            const timestamp = new Date().toISOString();
+            const sessionId = getSessionId();
+            
+            const conversionData = {
+                sessionId: sessionId,
+                eventType: eventType, // 'report_generated', 'report_downloaded', 'form_submitted'
+                eventValue: eventValue,
+                metadata: metadata,
+                timestamp: timestamp,
+                userAgent: navigator.userAgent,
+                referrer: document.referrer,
+                url: window.location.href
+            };
+
+            trackingData.conversionEvents.push(conversionData);
+            sendTrackingData('conversion', conversionData);
+            
+            console.log('전환 이벤트 추적:', conversionData);
+        }
+
+        // 세션 ID 생성
+        function getSessionId() {
+            let sessionId = sessionStorage.getItem('tracking_session_id');
+            if (!sessionId) {
+                sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                sessionStorage.setItem('tracking_session_id', sessionId);
+            }
+            return sessionId;
+        }
+
+        // 추적 데이터를 서버로 전송
+        function sendTrackingData(eventType, data) {
+            // 실제 구현에서는 서버 엔드포인트로 전송
+            // 예: fetch('/api/tracking', { method: 'POST', body: JSON.stringify(data) })
+            
+            // 현재는 로컬 스토리지에 저장
+            const existingData = JSON.parse(localStorage.getItem('tracking_data') || '{}');
+            if (!existingData[eventType]) {
+                existingData[eventType] = [];
+            }
+            existingData[eventType].push(data);
+            localStorage.setItem('tracking_data', JSON.stringify(existingData));
+        }
+
+        // 팝업 클릭율 계산
+        function calculatePopupClickRate(popupId, timeRange = 'all') {
+            const clicks = trackingData.popupClicks[popupId] || [];
+            const opens = clicks.filter(click => click.action === 'open').length;
+            const totalInteractions = clicks.length;
+            
+            return {
+                popupId: popupId,
+                totalOpens: opens,
+                totalInteractions: totalInteractions,
+                clickRate: opens > 0 ? (totalInteractions / opens * 100).toFixed(2) + '%' : '0%',
+                timeRange: timeRange
+            };
+        }
+
+        // 광고비 대비 수익률 계산
+        function calculateAdROI(adId, adCost, timeRange = 'all') {
+            const revenues = trackingData.adRevenue[adId] || [];
+            const totalRevenue = revenues.reduce((sum, rev) => sum + rev.revenue, 0);
+            const roi = adCost > 0 ? ((totalRevenue - adCost) / adCost * 100).toFixed(2) + '%' : 'N/A';
+            
+            return {
+                adId: adId,
+                totalRevenue: totalRevenue,
+                adCost: adCost,
+                roi: roi,
+                timeRange: timeRange
+            };
+        }
+
+        // 추적 데이터 대시보드 생성
+        function generateTrackingDashboard() {
+            const dashboard = {
+                summary: {
+                    totalSessions: trackingData.userSessions.length,
+                    totalConversions: trackingData.conversionEvents.length,
+                    totalPopupClicks: Object.values(trackingData.popupClicks).flat().length,
+                    totalAdRevenue: Object.values(trackingData.adRevenue).flat().reduce((sum, rev) => sum + rev.revenue, 0)
+                },
+                popupStats: {},
+                adStats: {},
+                conversionStats: {}
+            };
+
+            // 팝업 통계
+            Object.keys(trackingData.popupClicks).forEach(popupId => {
+                dashboard.popupStats[popupId] = calculatePopupClickRate(popupId);
+            });
+
+            // 광고 통계 (예시 비용 설정)
+            Object.keys(trackingData.adRevenue).forEach(adId => {
+                dashboard.adStats[adId] = calculateAdROI(adId, 10000); // 예시: 10,000원 광고비
+            });
+
+            return dashboard;
+        }
+
+        // 추적 데이터 내보내기
+        function exportTrackingData() {
+            const data = {
+                trackingData: trackingData,
+                dashboard: generateTrackingDashboard(),
+                exportDate: new Date().toISOString()
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `tracking_data_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // 개발자용 추적 데이터 확인 함수 (콘솔에서 사용)
+        window.trackingUtils = {
+            getData: () => trackingData,
+            getDashboard: () => generateTrackingDashboard(),
+            exportData: () => exportTrackingData(),
+            trackPopupClick: trackPopupClick,
+            trackAdRevenue: trackAdRevenue,
+            trackConversion: trackConversionEvent
+        };
+    </script>
+
     <script>
         // EmailJS 초기화
         (function() {
@@ -1218,7 +1442,7 @@
         // EmailJS 설정
         const EMAILJS_CONFIG = {
             serviceId: "service_1bvu13q",
-            templateId: "template_ocdkmfj",
+            templateId: "template_bojangjikimi",
             publicKey: "IlLEKruddDnX0TLdG"
         };
 
@@ -1438,6 +1662,8 @@
                 modal.classList.add('show');
             document.body.style.overflow = 'hidden';
                 resetModal();
+                // 모달 열기 추적
+                trackPopupClick('payment_modal', 'modal_popup', 'open');
             }
         }
 
@@ -1445,7 +1671,9 @@
             const modal = document.getElementById('paymentModal');
             if (modal) {
                 modal.classList.remove('show');
-            document.body.style.overflow = 'auto';
+                document.body.style.overflow = 'auto';
+                // 모달 닫기 추적
+                trackPopupClick('payment_modal', 'modal_popup', 'close');
             }
         }
         
@@ -1482,35 +1710,81 @@
             // 현재 단계 데이터 저장
             saveCurrentStepData();
             
-            // Step 2에서 특별한 로직 처리
-            if (currentStep === 2) {
+            // 각 단계별 입력 검증
+            if (currentStep === 1) {
+                // Step 1: 거주 상태 선택 검증
+                const selectedOption = document.querySelector('.step-content[data-step="1"] .option-btn.selected');
+                if (!selectedOption) {
+                    alert('거주 상태를 선택해주세요.');
+                    return;
+                }
+                currentStep = 2;
+            } else if (currentStep === 2) {
+                // Step 2: 상황 선택 검증
                 const selectedOption = document.querySelector('.step-content[data-step="2"] .option-btn.selected');
-                if (selectedOption) {
-                    const value = selectedOption.getAttribute('data-value');
-                    if (value === '현재거주') {
-                        // 현재거주는 바로 Step 3으로
-                        currentStep = 3;
-                    } else {
-                        // 나머지는 Step 2-2로
-                        currentStep = '2-2';
-                    }
+                if (!selectedOption) {
+                    alert('상황을 선택해주세요.');
+                    return;
+                }
+                const value = selectedOption.getAttribute('data-value');
+                if (value === '현재거주') {
+                    // 현재거주는 바로 Step 3으로
+                    currentStep = 3;
                 } else {
-                    currentStep++;
+                    // 나머지는 Step 2-2로
+                    currentStep = '2-2';
                 }
             } else if (currentStep === '2-2') {
-                // Step 2-2에서 Step 3으로
+                // Step 2-2: 상세 상황 선택 검증
+                const selectedOption = document.querySelector('.step-content[data-step="2-2"] .option-btn.selected');
+                if (!selectedOption) {
+                    alert('상세 상황을 선택해주세요.');
+                    return;
+                }
                 currentStep = 3;
             } else if (currentStep === 3) {
-                // Step 3에서 Step 4로
+                // Step 3: 금액 입력 검증
+                const amountInput = document.getElementById('amountInput');
+                const monthlyAmountInput = document.getElementById('monthlyAmountInput');
+                const monthlyRentSection = document.getElementById('monthlyRentSection');
+                
+                if (!amountInput || !amountInput.value || parseInt(amountInput.value) <= 0) {
+                    alert('보증금 금액을 입력해주세요.');
+                    return;
+                }
+                
+                // 월세 입력이 필요한 경우 검증
+                if (monthlyRentSection && monthlyRentSection.style.display !== 'none') {
+                    if (!monthlyAmountInput || !monthlyAmountInput.value || parseInt(monthlyAmountInput.value) <= 0) {
+                        alert('월세 금액을 입력해주세요.');
+                        return;
+                    }
+                }
+                
                 currentStep = 4;
             } else if (currentStep === 4) {
-                // Step 4에서 Step 5로
+                // Step 4: 계약 기간 선택 검증
+                const selectedOption = document.querySelector('.step-content[data-step="4"] .option-btn.selected');
+                if (!selectedOption) {
+                    alert('계약 기간을 선택해주세요.');
+                    return;
+                }
                 currentStep = 5;
             } else if (currentStep === 5) {
-                // Step 5에서 Step 6으로
+                // Step 5: 주소 입력 검증
+                const addressCityDistrict = document.getElementById('addressCityDistrict');
+                const addressDetail = document.getElementById('addressDetail');
+                if (!addressCityDistrict || !addressCityDistrict.value.trim()) {
+                    alert('시/도, 구/군을 입력해주세요.');
+                    return;
+                }
+                if (!addressDetail || !addressDetail.value.trim()) {
+                    alert('상세 주소를 입력해주세요.');
+                    return;
+                }
                 currentStep = 6;
             } else if (currentStep === 6) {
-                // Step 6에서 Step 7으로 (본인 정보 입력 검증)
+                // Step 6: 본인 정보 입력 검증
                 if (!validatePersonalInfo()) {
                     return; // 검증 실패 시 진행 중단
                 }
@@ -1628,12 +1902,73 @@
                 backBtn.style.display = 'block';
             }
             
-            // 다음 버튼 텍스트
-            if (currentStep === totalSteps) {
-                nextBtn.textContent = '완료';
+            // 다음 버튼 텍스트 및 상태
+            if (currentStep === 7) {
+                nextBtn.textContent = '신청하기!';
+                nextBtn.disabled = paymentStatus !== 'paid';
             } else {
                 nextBtn.textContent = '다음';
+                // 각 단계별 입력 상태 확인하여 버튼 활성화/비활성화
+                nextBtn.disabled = !isCurrentStepValid();
             }
+        }
+        
+        // 현재 단계의 입력이 유효한지 확인하는 함수
+        function isCurrentStepValid() {
+            if (currentStep === 1) {
+                // Step 1: 거주 상태 선택 확인
+                const selectedOption = document.querySelector('.step-content[data-step="1"] .option-btn.selected');
+                return selectedOption !== null;
+            } else if (currentStep === 2) {
+                // Step 2: 상황 선택 확인
+                const selectedOption = document.querySelector('.step-content[data-step="2"] .option-btn.selected');
+                return selectedOption !== null;
+            } else if (currentStep === '2-2') {
+                // Step 2-2: 상세 상황 선택 확인
+                const selectedOption = document.querySelector('.step-content[data-step="2-2"] .option-btn.selected');
+                return selectedOption !== null;
+            } else if (currentStep === 3) {
+                // Step 3: 금액 입력 확인
+                const amountInput = document.getElementById('amountInput');
+                const monthlyAmountInput = document.getElementById('monthlyAmountInput');
+                const monthlyRentSection = document.getElementById('monthlyRentSection');
+                
+                // 보증금 입력 확인
+                if (!amountInput || !amountInput.value || parseInt(amountInput.value) <= 0) {
+                    return false;
+                }
+                
+                // 월세 입력이 필요한 경우 확인
+                if (monthlyRentSection && monthlyRentSection.style.display !== 'none') {
+                    if (!monthlyAmountInput || !monthlyAmountInput.value || parseInt(monthlyAmountInput.value) <= 0) {
+                        return false;
+                    }
+                }
+                
+                return true;
+            } else if (currentStep === 4) {
+                // Step 4: 계약 기간 선택 확인
+                const selectedOption = document.querySelector('.step-content[data-step="4"] .option-btn.selected');
+                return selectedOption !== null;
+            } else if (currentStep === 5) {
+                // Step 5: 주소 입력 확인
+                const addressCityDistrict = document.getElementById('addressCityDistrict');
+                const addressDetail = document.getElementById('addressDetail');
+                return addressCityDistrict && addressCityDistrict.value.trim() && 
+                       addressDetail && addressDetail.value.trim();
+            } else if (currentStep === 6) {
+                // Step 6: 본인 정보 입력 확인
+                const userName = document.getElementById('userName');
+                const userPhone = document.getElementById('userPhone');
+                const userEmail = document.getElementById('userEmail');
+                const privacyAgreement = document.getElementById('privacyAgreement');
+                
+                return userName && userName.value.trim() &&
+                       userPhone && userPhone.value.trim() &&
+                       userEmail && userEmail.value.trim() &&
+                       privacyAgreement && privacyAgreement.checked;
+            }
+            return true; // 기본적으로 유효하다고 간주
         }
         
         function updateModalTitle() {
@@ -1722,12 +2057,20 @@
         }
         
         async function completeForm() {
+            fbq('track', 'Purchase', {value: 6900, currency: 'KRW'}); 
             // 현재 단계(Step 7) 데이터 저장
             saveCurrentStepData();
             
             // 디버깅을 위한 콘솔 로그
             console.log('Complete Form - Current Step:', currentStep);
             console.log('Complete Form - Modal Data:', modalData);
+            
+            // 폼 제출 추적
+            trackConversionEvent('form_submitted', 'payment_modal', {
+                propertyType: modalData.propertyType,
+                depositAmount: modalData.depositAmount,
+                step: currentStep
+            });
             
             // 기본 데이터 검증
             if (!modalData.propertyType) {
@@ -1813,6 +2156,18 @@
                 if (sheetsSuccess && emailSuccess) {
                     alert(alertMessage);
                     console.log('✅ 모든 작업이 성공적으로 완료되었습니다.');
+                    
+                    // 성공적인 전환 추적
+                    trackConversionEvent('payment_completed', modalData.amount, {
+                        propertyType: modalData.propertyType,
+                        residenceStatus: modalData.residenceStatus,
+                        amount: modalData.amount,
+                        monthlyRent: modalData.monthlyRent,
+                        trafficCode: modalData.trafficCode
+                    });
+                    
+                    // 광고 수익 추적 (예시: 5,000원 수익)
+                    trackAdRevenue('payment_conversion', 'conversion', 5000, 'KRW');
                 } else if (sheetsSuccess || emailSuccess) {
                     alertMessage += `\n\n⚠️ 일부 작업에서 문제가 발생했을 수 있습니다.`;
                     alert(alertMessage);
@@ -1934,6 +2289,9 @@
                     modalData.monthlyRent = 0;
                 }
             }
+            
+            // 버튼 상태 업데이트
+            updateNavigationButtons();
         }
         
         function searchAddress() {
@@ -2040,8 +2398,37 @@
                     if (currentStepElement.getAttribute('data-step') === '1') {
                         toggleMonthlyRentSection();
                     }
+                    
+                    // 버튼 상태 업데이트
+                    updateNavigationButtons();
                 });
             });
+            
+            // 입력 필드 실시간 검증 이벤트 추가
+            const amountInput = document.getElementById('amountInput');
+            if (amountInput) {
+                amountInput.addEventListener('input', updateNavigationButtons);
+            }
+            
+            const addressInputs = document.querySelectorAll('#addressCityDistrict, #addressDetail');
+            addressInputs.forEach(input => {
+                input.addEventListener('input', updateNavigationButtons);
+            });
+            
+            const personalInfoInputs = document.querySelectorAll('#userName, #userPhone, #userEmail');
+            personalInfoInputs.forEach(input => {
+                input.addEventListener('input', updateNavigationButtons);
+            });
+            
+            const privacyAgreement = document.getElementById('privacyAgreement');
+            if (privacyAgreement) {
+                privacyAgreement.addEventListener('change', updateNavigationButtons);
+            }
+            
+            const monthlyAmountInput = document.getElementById('monthlyAmountInput');
+            if (monthlyAmountInput) {
+                monthlyAmountInput.addEventListener('input', updateNavigationButtons);
+            }
             
             // FAQ 토글 기능
             const faqItems = document.querySelectorAll('.faq-item');
@@ -2214,6 +2601,18 @@
             window.changeProblemCard = function(direction) {
                 const newIndex = currentProblemCard + direction;
                 
+                // 마지막 카드에서 다음 버튼을 누를 때 curiosity 섹션으로 스크롤
+                if (direction > 0 && currentProblemCard === totalProblemCards) {
+                    const curiositySection = document.getElementById('curiosity');
+                    if (curiositySection) {
+                        curiositySection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                    return;
+                }
+                
                 if (newIndex >= 1 && newIndex <= totalProblemCards) {
                     const currentCard = document.querySelector(`.problem-card[data-card="${currentProblemCard}"]`);
                     const newCard = document.querySelector(`.problem-card[data-card="${newIndex}"]`);
@@ -2257,7 +2656,8 @@
                 const nextButton = document.querySelector('.nav-button.next');
                 
                 prevButton.disabled = currentProblemCard === 1;
-                nextButton.disabled = currentProblemCard === totalProblemCards;
+                // 마지막 카드에서도 다음 버튼을 활성화 (curiosity 섹션으로 이동)
+                nextButton.disabled = false;
             }
             
             // 도트 클릭 기능

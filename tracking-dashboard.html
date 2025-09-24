@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>팝업 클릭율 및 광고비 대비 수익률 대시보드 - 보증지킴이</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+            background: #f8fafc;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .dashboard-header {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .dashboard-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .dashboard-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid #e5e7eb;
+        }
+
+        .stat-title {
+            font-size: 0.9rem;
+            color: #6b7280;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1e40af;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-change {
+            font-size: 0.8rem;
+            color: #10b981;
+        }
+
+        .section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid #e5e7eb;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .popup-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .popup-card {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .popup-name {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .popup-metrics {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-weight: 700;
+            color: #1e40af;
+        }
+
+        .metric-label {
+            color: #6b7280;
+            font-size: 0.8rem;
+        }
+
+        .conversion-events {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .event-item {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .event-type {
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 0.25rem;
+        }
+
+        .event-details {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .event-time {
+            font-size: 0.8rem;
+            color: #9ca3af;
+            margin-top: 0.25rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #1e40af;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .no-data {
+            text-align: center;
+            color: #6b7280;
+            font-style: italic;
+            padding: 2rem;
+        }
+
+        .loading {
+            text-align: center;
+            color: #6b7280;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 1rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">📊 추적 데이터 대시보드</h1>
+            <p class="dashboard-subtitle">팝업 클릭율 및 광고비 대비 수익률 분석</p>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn btn-primary" onclick="refreshData()">🔄 데이터 새로고침</button>
+            <button class="btn btn-secondary" onclick="clearData()">🗑️ 데이터 초기화</button>
+            <button class="btn btn-success" onclick="exportData()">📥 데이터 내보내기</button>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-title">총 세션 수</div>
+                <div class="stat-value" id="totalSessions">0</div>
+                <div class="stat-change">+0%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">총 전환 수</div>
+                <div class="stat-value" id="totalConversions">0</div>
+                <div class="stat-change">+0%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">총 팝업 클릭</div>
+                <div class="stat-value" id="totalPopupClicks">0</div>
+                <div class="stat-change">+0%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">총 광고 수익</div>
+                <div class="stat-value" id="totalAdRevenue">0원</div>
+                <div class="stat-change">+0%</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">📈 팝업 클릭율 분석</h2>
+            <div class="popup-stats" id="popupStats">
+                <div class="no-data">데이터를 불러오는 중...</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">💰 광고비 대비 수익률 분석</h2>
+            <div class="popup-stats" id="adStats">
+                <div class="no-data">데이터를 불러오는 중...</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">🎯 최근 전환 이벤트</h2>
+            <div class="conversion-events" id="conversionEvents">
+                <div class="no-data">데이터를 불러오는 중...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 추적 데이터 로드
+        function loadTrackingData() {
+            try {
+                const data = JSON.parse(localStorage.getItem('tracking_data') || '{}');
+                return data;
+            } catch (error) {
+                console.error('데이터 로드 오류:', error);
+                return {};
+            }
+        }
+
+        // 팝업 클릭율 계산
+        function calculatePopupClickRate(popupId, clicks) {
+            const opens = clicks.filter(click => click.action === 'open').length;
+            const totalInteractions = clicks.length;
+            const clickRate = opens > 0 ? (totalInteractions / opens * 100).toFixed(2) + '%' : '0%';
+            
+            return {
+                popupId,
+                totalOpens: opens,
+                totalInteractions,
+                clickRate
+            };
+        }
+
+        // 광고비 대비 수익률 계산
+        function calculateAdROI(adId, revenues, adCost = 10000) {
+            const totalRevenue = revenues.reduce((sum, rev) => sum + rev.revenue, 0);
+            const roi = adCost > 0 ? ((totalRevenue - adCost) / adCost * 100).toFixed(2) + '%' : 'N/A';
+            
+            return {
+                adId,
+                totalRevenue,
+                adCost,
+                roi
+            };
+        }
+
+        // 대시보드 업데이트
+        function updateDashboard() {
+            const data = loadTrackingData();
+            
+            // 전체 통계 업데이트
+            const totalSessions = new Set();
+            const totalConversions = data.conversion || [];
+            const totalPopupClicks = Object.values(data.popup_click || {}).flat();
+            const totalAdRevenue = Object.values(data.ad_revenue || {}).flat().reduce((sum, rev) => sum + rev.revenue, 0);
+
+            // 세션 수 계산
+            totalPopupClicks.forEach(click => totalSessions.add(click.sessionId));
+            totalConversions.forEach(conversion => totalSessions.add(conversion.sessionId));
+
+            document.getElementById('totalSessions').textContent = totalSessions.size;
+            document.getElementById('totalConversions').textContent = totalConversions.length;
+            document.getElementById('totalPopupClicks').textContent = totalPopupClicks.length;
+            document.getElementById('totalAdRevenue').textContent = totalAdRevenue.toLocaleString() + '원';
+
+            // 팝업 통계 업데이트
+            updatePopupStats(data.popup_click || {});
+            
+            // 광고 통계 업데이트
+            updateAdStats(data.ad_revenue || {});
+            
+            // 전환 이벤트 업데이트
+            updateConversionEvents(totalConversions);
+        }
+
+        // 팝업 통계 업데이트
+        function updatePopupStats(popupClicks) {
+            const container = document.getElementById('popupStats');
+            
+            if (Object.keys(popupClicks).length === 0) {
+                container.innerHTML = '<div class="no-data">팝업 클릭 데이터가 없습니다.</div>';
+                return;
+            }
+
+            const stats = Object.keys(popupClicks).map(popupId => {
+                const clicks = popupClicks[popupId];
+                const stats = calculatePopupClickRate(popupId, clicks);
+                
+                return `
+                    <div class="popup-card">
+                        <div class="popup-name">${popupId}</div>
+                        <div class="popup-metrics">
+                            <div class="metric">
+                                <div class="metric-value">${stats.totalOpens}</div>
+                                <div class="metric-label">열기</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">${stats.totalInteractions}</div>
+                                <div class="metric-label">상호작용</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">${stats.clickRate}</div>
+                                <div class="metric-label">클릭율</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            container.innerHTML = stats;
+        }
+
+        // 광고 통계 업데이트
+        function updateAdStats(adRevenue) {
+            const container = document.getElementById('adStats');
+            
+            if (Object.keys(adRevenue).length === 0) {
+                container.innerHTML = '<div class="no-data">광고 수익 데이터가 없습니다.</div>';
+                return;
+            }
+
+            const stats = Object.keys(adRevenue).map(adId => {
+                const revenues = adRevenue[adId];
+                const stats = calculateAdROI(adId, revenues);
+                
+                return `
+                    <div class="popup-card">
+                        <div class="popup-name">${adId}</div>
+                        <div class="popup-metrics">
+                            <div class="metric">
+                                <div class="metric-value">${stats.totalRevenue.toLocaleString()}원</div>
+                                <div class="metric-label">총 수익</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">${stats.adCost.toLocaleString()}원</div>
+                                <div class="metric-label">광고비</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">${stats.roi}</div>
+                                <div class="metric-label">ROI</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            container.innerHTML = stats;
+        }
+
+        // 전환 이벤트 업데이트
+        function updateConversionEvents(conversions) {
+            const container = document.getElementById('conversionEvents');
+            
+            if (conversions.length === 0) {
+                container.innerHTML = '<div class="no-data">전환 이벤트 데이터가 없습니다.</div>';
+                return;
+            }
+
+            // 최근 20개 이벤트만 표시
+            const recentConversions = conversions.slice(-20).reverse();
+            
+            const events = recentConversions.map(conversion => {
+                const time = new Date(conversion.timestamp).toLocaleString('ko-KR');
+                
+                return `
+                    <div class="event-item">
+                        <div class="event-type">${conversion.eventType}</div>
+                        <div class="event-details">값: ${conversion.eventValue}</div>
+                        <div class="event-time">${time}</div>
+                    </div>
+                `;
+            }).join('');
+
+            container.innerHTML = events;
+        }
+
+        // 데이터 새로고침
+        function refreshData() {
+            updateDashboard();
+            alert('데이터가 새로고침되었습니다.');
+        }
+
+        // 데이터 초기화
+        function clearData() {
+            if (confirm('모든 추적 데이터를 삭제하시겠습니까?')) {
+                localStorage.removeItem('tracking_data');
+                updateDashboard();
+                alert('데이터가 초기화되었습니다.');
+            }
+        }
+
+        // 데이터 내보내기
+        function exportData() {
+            const data = loadTrackingData();
+            const exportData = {
+                ...data,
+                exportDate: new Date().toISOString(),
+                summary: {
+                    totalSessions: document.getElementById('totalSessions').textContent,
+                    totalConversions: document.getElementById('totalConversions').textContent,
+                    totalPopupClicks: document.getElementById('totalPopupClicks').textContent,
+                    totalAdRevenue: document.getElementById('totalAdRevenue').textContent
+                }
+            };
+            
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `tracking_dashboard_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // 페이지 로드 시 대시보드 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDashboard();
+            
+            // 30초마다 자동 새로고침
+            setInterval(updateDashboard, 30000);
+        });
+    </script>
+</body>
+</html>

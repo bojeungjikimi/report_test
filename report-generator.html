@@ -5,6 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>부동산 안전성 검증 보고서 생성기 - 보증지킴이</title>
     <link rel="stylesheet" href="css/report-generator-styles.css">
+    
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1330722015430909');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1330722015430909&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
 </head>
 <body>
     <div class="container">
@@ -532,6 +550,101 @@
         </div>
     </div>
 
+    <!-- 팝업 클릭율 및 광고비 대비 수익률 측정을 위한 추적 코드 -->
+    <script>
+        /**
+         * ========================================
+         * 팝업 클릭율 및 광고비 대비 수익률 측정 시스템
+         * ========================================
+         */
+        
+        // 추적 데이터 저장소
+        const trackingData = {
+            popupClicks: {},
+            adRevenue: {},
+            userSessions: [],
+            conversionEvents: []
+        };
+
+        // 팝업 클릭 추적 함수
+        function trackPopupClick(popupId, popupType, action) {
+            const timestamp = new Date().toISOString();
+            const sessionId = getSessionId();
+            
+            const clickData = {
+                sessionId: sessionId,
+                popupId: popupId,
+                popupType: popupType,
+                action: action, // 'open', 'close', 'interact'
+                timestamp: timestamp,
+                userAgent: navigator.userAgent,
+                referrer: document.referrer,
+                url: window.location.href
+            };
+
+            // 로컬 저장소에 저장
+            if (!trackingData.popupClicks[popupId]) {
+                trackingData.popupClicks[popupId] = [];
+            }
+            trackingData.popupClicks[popupId].push(clickData);
+
+            // 서버로 전송 (실제 구현 시)
+            sendTrackingData('popup_click', clickData);
+            
+            console.log('팝업 클릭 추적:', clickData);
+        }
+
+        // 전환 이벤트 추적 (보고서 생성, 다운로드 등)
+        function trackConversionEvent(eventType, eventValue, metadata = {}) {
+            const timestamp = new Date().toISOString();
+            const sessionId = getSessionId();
+            
+            const conversionData = {
+                sessionId: sessionId,
+                eventType: eventType, // 'report_generated', 'report_downloaded', 'form_submitted'
+                eventValue: eventValue,
+                metadata: metadata,
+                timestamp: timestamp,
+                userAgent: navigator.userAgent,
+                referrer: document.referrer,
+                url: window.location.href
+            };
+
+            trackingData.conversionEvents.push(conversionData);
+            sendTrackingData('conversion', conversionData);
+            
+            console.log('전환 이벤트 추적:', conversionData);
+        }
+
+        // 세션 ID 생성
+        function getSessionId() {
+            let sessionId = sessionStorage.getItem('tracking_session_id');
+            if (!sessionId) {
+                sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                sessionStorage.setItem('tracking_session_id', sessionId);
+            }
+            return sessionId;
+        }
+
+        // 추적 데이터를 서버로 전송
+        function sendTrackingData(eventType, data) {
+            // 현재는 로컬 스토리지에 저장
+            const existingData = JSON.parse(localStorage.getItem('tracking_data') || '{}');
+            if (!existingData[eventType]) {
+                existingData[eventType] = [];
+            }
+            existingData[eventType].push(data);
+            localStorage.setItem('tracking_data', JSON.stringify(existingData));
+        }
+
+        // 개발자용 추적 데이터 확인 함수 (콘솔에서 사용)
+        window.trackingUtils = {
+            getData: () => trackingData,
+            trackPopupClick: trackPopupClick,
+            trackConversion: trackConversionEvent
+        };
+    </script>
+
     <script>
         /**
          * ========================================
@@ -542,14 +655,17 @@
         // 분석 유형 선택 팝업 관련 함수들
         function openAnalysisSelector() {
             document.getElementById('analysisSelectorPopup').style.display = 'flex';
+            trackPopupClick('analysis_selector', 'popup_selector', 'open');
         }
 
         function closeAnalysisSelector() {
             document.getElementById('analysisSelectorPopup').style.display = 'none';
+            trackPopupClick('analysis_selector', 'popup_selector', 'close');
         }
 
         function selectAnalysis(analysisType) {
             document.getElementById('selectedAnalysis').textContent = analysisType;
+            trackPopupClick('analysis_selector', 'popup_selector', 'interact');
             closeAnalysisSelector();
         }
 
@@ -827,6 +943,14 @@
                     showNotification('❌ 필수 정보를 모두 입력해주세요.', 'error');
                     return;
                 }
+                
+                // 보고서 생성 추적
+                trackConversionEvent('report_generated', 'report_generator', {
+                    customerName: formData.customerName,
+                    propertyAddress: formData.propertyAddress,
+                    depositAmount: formData.depositAmount,
+                    totalScore: formData.totalScore
+                });
 
                 // 점수에 따른 자동 설명 생성
                 formData.scoreDescription = generateScoreDescription(formData.totalScore, formData.scoreLabel);
@@ -880,6 +1004,14 @@
                 
                 // URL 해제
                 URL.revokeObjectURL(url);
+                
+                // 보고서 다운로드 추적
+                trackConversionEvent('report_downloaded', fileName, {
+                    customerName: formData.customerName,
+                    propertyAddress: formData.propertyAddress,
+                    depositAmount: formData.depositAmount,
+                    totalScore: formData.totalScore
+                });
                 
                 console.log(`✅ 새로운 HTML 파일 생성 완료: ${fileName}`);
                 

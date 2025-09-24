@@ -20,6 +20,19 @@
             padding: 0;
             box-sizing: border-box;
         }
+
+        /* 좌우 스크롤 방지 */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+        
+        /* 402px 고정 너비 */
+        body.fixed-width {
+            max-width: 402px;
+            margin: 0 auto;
+            position: relative;
+        }
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
@@ -34,32 +47,6 @@
             padding: 0 15px;
         }
         
-        /* 402px 이상에서 구분선 추가 */
-        @media (min-width: 403px) {
-            body::before {
-                content: '';
-                position: fixed;
-                left: calc(50% - 201px);
-                top: 0;
-                width: 1px;
-                height: 100%;
-                background: rgba(0,0,0,0.1);
-                z-index: 100;
-                pointer-events: none;
-            }
-            
-            body::after {
-                content: '';
-                position: fixed;
-                left: calc(50% + 201px);
-                top: 0;
-                width: 1px;
-                height: 100%;
-                background: rgba(0,0,0,0.1);
-                z-index: 100;
-                pointer-events: none;
-            }
-        }
         
         /* ===== Header (402px 기준) ===== */
         header, .top-bar {
@@ -140,6 +127,8 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
+            width: 100%;
+            max-width: 100vw;
         }
         
         .hero::before {
@@ -673,6 +662,9 @@
             transform: translateX(100%);
             transition: all 0.3s ease-in-out;
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
         }
         
         .problem-card.active {
@@ -1637,13 +1629,64 @@
             .progress-dot {
                 width: 18px;
             }
+            
+            /* 좌우 스크롤 방지 추가 스타일 */
+            .problem-navigation {
+                gap: 0.5rem;
+                padding: 0 0.5rem;
+            }
+            
+            .nav-button {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .nav-dots {
+                gap: 0.3rem;
+            }
+            
+            .dot {
+                width: 10px;
+                height: 10px;
+            }
+            
+            .problem-card {
+                padding: 1.5rem;
+            }
+            
+            .hero {
+                padding: 100px 0 50px;
+            }
         }
         
         /* 데스크톱에서 402px 고정 너비 */
         @media (min-width: 403px) {
+            .container {
+                max-width: 402px;
+                margin: 0 auto;
+                padding: 0 15px;
+            }
+            
             .multistep-modal {
                 width: 402px;
                 max-width: 402px;
+            }
+            
+            /* 모든 섹션을 402px로 고정 */
+            .hero,
+            .features,
+            .problem-solution,
+            .cta-section,
+            .footer {
+                max-width: 402px;
+                margin: 0 auto;
+            }
+            
+            /* 헤더와 푸터도 고정 */
+            .top-bar,
+            .header {
+                max-width: 402px;
+                margin: 0 auto;
             }
         }
         
@@ -3247,6 +3290,9 @@
             margin: 2rem 0;
             position: relative;
             z-index: 10;
+            width: 100%;
+            max-width: 100%;
+            padding: 0 1rem;
         }
         
         .nav-button {
@@ -3259,6 +3305,8 @@
             cursor: pointer;
             transition: var(--transition);
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            white-space: nowrap;
+            flex-shrink: 0;
         }
         
         .nav-button:hover {
@@ -4285,6 +4333,7 @@
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
         }
+
         
         .payment-btn.not-paid {
             background: linear-gradient(135deg, #f59e0b, #d97706);
