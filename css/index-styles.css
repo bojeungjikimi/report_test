@@ -800,7 +800,7 @@
         
         /* ===== Features Section (402px 기준) ===== */
         .features {
-            padding: 60px 0;
+            padding: 80px 0;
             background: #ffffff;
             position: relative;
         }
@@ -1229,7 +1229,7 @@
         
         /* ===== FAQ 섹션 ===== */
         .faq-section {
-            padding: 60px 0;
+            padding: 70px 0;
             background: #ffffff;
             position: relative;
         }
@@ -2084,7 +2084,7 @@
             padding: 1rem 2rem;
             border-radius: 12px;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.8rem;
             cursor: pointer;
             transition: var(--transition);
             min-width: 120px;
@@ -2279,7 +2279,7 @@
         
         /* ===== Safety Score Section ===== */
         .safety-score-section {
-            padding: 50px 0;
+            padding: 80px 0;
             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             text-align: center;
             position: relative;
@@ -2835,7 +2835,7 @@
 
         /* ===== Trust Section (매력적인 디자인) ===== */
         .trust-section {
-            padding: 50px 0;
+            padding: 70px 0;
             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             text-align: center;
             position: relative;
@@ -3081,7 +3081,7 @@
         
         /* ===== Urgency Section (402px 기준) ===== */
         .urgency-section {
-            padding: 50px 0;
+            padding: 70px 0;
             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             color: #1e40af;
             text-align: center;

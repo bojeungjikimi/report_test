@@ -1083,7 +1083,7 @@
                     <div class="address-input-section" style="margin: 0 auto 1rem auto; max-width: 300px; width: 100%;">
                         <div class="address-field">
                             <label class="address-label">시/도, 구/군</label>
-                            <input type="text" class="address-input-small" id="addressCityDistrict" placeholder="예: 서울시 강남구" oninput="updateFraudStats()">
+                            <input type="text" class="address-input-small" id="addressCityDistrict" placeholder="예: 서울특별시 강남구" oninput="updateFraudStats()">
                         </div>
                         <div class="address-field">
                             <label class="address-label">동/읍/면</label>
@@ -1115,7 +1115,7 @@
                         </div>
                         <div class="address-field">
                             <label class="address-label">연락처 *</label>
-                            <input type="tel" class="address-input-small" id="userPhone" placeholder="010-1234-5678" required oninput="formatPhoneNumber(this)" onfocus="handlePhoneFocus(this)" onblur="handlePhoneBlur(this)">
+                            <input type="tel" class="address-input-small" id="userPhone" placeholder="010-1234-5678" required oninput="formatPhoneNumber(this)" onfocus="handlePhoneFocus(this)" onblur="handlePhoneBlur(this)" onkeydown="handlePhoneKeyDown(this, event)">
                         </div>
                         <div class="address-field">
                             <label class="address-label">이메일 *</label>
@@ -1456,9 +1456,14 @@
         function formatPhoneNumber(input) {
             let value = input.value.replace(/[^\d]/g, ''); // 숫자만 추출
             
-            // 010으로 시작하지 않으면 010으로 설정
+            // 010으로 시작하지 않으면 010으로 강제 설정
             if (!value.startsWith('010')) {
                 value = '010' + value.replace(/^010/, '');
+            }
+            
+            // 010이 삭제되려고 하면 강제로 010 유지
+            if (value.length < 3) {
+                value = '010';
             }
             
             // 최대 11자리까지만 허용
@@ -1489,19 +1494,40 @@
 
         // 전화번호 입력 필드 포커스 이벤트
         function handlePhoneFocus(input) {
-            // 포커스 시 커서를 010 뒤로 이동
-            if (input.value === '010') {
-                setTimeout(() => {
-                    input.setSelectionRange(3, 3);
-                }, 0);
+            // 포커스 시 010이 없으면 010으로 설정
+            if (!input.value.startsWith('010')) {
+                input.value = '010';
             }
+            
+            // 포커스 시 커서를 010 뒤로 이동
+            setTimeout(() => {
+                input.setSelectionRange(3, 3);
+            }, 0);
         }
 
         // 전화번호 입력 필드 블러 이벤트
         function handlePhoneBlur(input) {
-            // 블러 시 010만 있으면 그대로 유지
-            if (input.value === '010') {
+            // 블러 시 010이 없으면 010으로 강제 설정
+            if (!input.value.startsWith('010')) {
                 input.value = '010';
+            }
+        }
+
+        // 전화번호 입력 필드 키 다운 이벤트
+        function handlePhoneKeyDown(input, event) {
+            const cursorPosition = input.selectionStart;
+            const value = input.value.replace(/[^\d]/g, '');
+            
+            // Backspace나 Delete 키로 010 부분을 삭제하려고 할 때 방지
+            if ((event.key === 'Backspace' || event.key === 'Delete') && cursorPosition <= 3) {
+                event.preventDefault();
+                return false;
+            }
+            
+            // 010 부분에 직접 입력하려고 할 때 방지
+            if (cursorPosition < 3 && /^\d$/.test(event.key)) {
+                event.preventDefault();
+                return false;
             }
         }
 
@@ -1633,7 +1659,9 @@
             '인천시 동구': { count: 1, amount: '3천만원', risk: '낮음' },
             '인천시 중구': { count: 1, amount: '2천만원', risk: '낮음' },
             '인천시 강화군': { count: 0, amount: '0원', risk: '매우 낮음' },
-            '인천시 옹진군': { count: 0, amount: '0원', risk: '매우 낮음' }
+            '인천시 옹진군': { count: 0, amount: '0원', risk: '매우 낮음' },
+            // 전국 통계 데이터
+            '전국': { count: 2847, amount: '1,247억 3천만원', risk: '보통' }
         };
 
         // 멀티스텝 모달 데이터 저장
@@ -1704,6 +1732,23 @@
                 closeModal();
             }
         }
+
+        // 키보드 이벤트 처리 - 모달이 열려있을 때 Enter 키로 다음 단계로 이동
+        document.addEventListener('keydown', function(event) {
+            // Enter 키를 눌렀을 때
+            if (event.key === 'Enter') {
+                const modal = document.getElementById('paymentModal');
+                // 모달이 열려있는지 확인
+                if (modal && modal.classList.contains('show')) {
+                    // 현재 활성화된 다음 버튼 찾기
+                    const nextBtn = document.querySelector('.nav-btn.next:not([disabled])');
+                    if (nextBtn) {
+                        event.preventDefault(); // 기본 동작 방지
+                        nextBtn.click(); // 다음 버튼 클릭 효과
+                    }
+                }
+            }
+        });
 
         // 단계별 네비게이션
         function goToNextStep() {
@@ -2166,8 +2211,8 @@
                         trafficCode: modalData.trafficCode
                     });
                     
-                    // 광고 수익 추적 (예시: 5,000원 수익)
-                    trackAdRevenue('payment_conversion', 'conversion', 5000, 'KRW');
+                    // 광고 수익 추적 (예시: 6,900원 수익)
+                    trackAdRevenue('payment_conversion', 'conversion', 6900, 'KRW');
                 } else if (sheetsSuccess || emailSuccess) {
                     alertMessage += `\n\n⚠️ 일부 작업에서 문제가 발생했을 수 있습니다.`;
                     alert(alertMessage);
@@ -2313,6 +2358,23 @@
         function updateFraudStats() {
             const addressCityDistrict = document.getElementById('addressCityDistrict');
             if (!addressCityDistrict || !addressCityDistrict.value.trim()) {
+                // 입력이 비어있을 때도 전국 통계 표시
+                const nationalStats = fraudStatsData['전국'];
+                document.getElementById('statsLocation').textContent = '전국 (2025년 기준)';
+                document.getElementById('fraudCount').textContent = nationalStats.count + '건';
+                document.getElementById('fraudAmount').textContent = nationalStats.amount;
+                document.getElementById('riskLevel').textContent = nationalStats.risk;
+                
+                // 전국 통계에 맞는 색상 적용
+                const riskLevelElement = document.getElementById('riskLevel');
+                const fraudStatsCard = document.getElementById('fraudStatsCard');
+                
+                // 기존 색상 클래스 제거
+                fraudStatsCard.classList.remove('risk-low', 'risk-medium', 'risk-high', 'risk-very-low');
+                
+                // 전국 통계 위험도에 따른 색상 적용
+                fraudStatsCard.classList.add('risk-medium');
+                riskLevelElement.style.color = '#f59e0b';
                 return;
             }
 
@@ -2353,11 +2415,23 @@
                         break;
                 }
             } else {
-                // 데이터가 없는 경우 기본값 설정
-                document.getElementById('statsLocation').textContent = cityDistrict;
-                document.getElementById('fraudCount').textContent = '데이터 없음';
-                document.getElementById('fraudAmount').textContent = '데이터 없음';
-                document.getElementById('riskLevel').textContent = '알 수 없음';
+                // 데이터가 없는 경우 전국 통계 표시
+                const nationalStats = fraudStatsData['전국'];
+                document.getElementById('statsLocation').textContent = '전국 (2025년 기준)';
+                document.getElementById('fraudCount').textContent = nationalStats.count + '건';
+                document.getElementById('fraudAmount').textContent = nationalStats.amount;
+                document.getElementById('riskLevel').textContent = nationalStats.risk;
+                
+                // 전국 통계에 맞는 색상 적용
+                const riskLevelElement = document.getElementById('riskLevel');
+                const fraudStatsCard = document.getElementById('fraudStatsCard');
+                
+                // 기존 색상 클래스 제거
+                fraudStatsCard.classList.remove('risk-low', 'risk-medium', 'risk-high', 'risk-very-low');
+                
+                // 전국 통계 위험도에 따른 색상 적용
+                fraudStatsCard.classList.add('risk-medium');
+                riskLevelElement.style.color = '#f59e0b';
             }
         }
         
@@ -2702,6 +2776,9 @@
             
             // Verification Cases 애니메이션 초기화
             initVerificationCasesAnimation();
+            
+            // 초기 전세사기 통계 표시 (전국 통계)
+            updateFraudStats();
         });
 
         // Smooth scrolling for anchor links

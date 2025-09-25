@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>팝업 클릭율 및 광고비 대비 수익률 대시보드 - 보증지킴이</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
     <style>
         * {
             margin: 0;
@@ -246,6 +247,7 @@
             <button class="btn btn-primary" onclick="refreshData()">🔄 데이터 새로고침</button>
             <button class="btn btn-secondary" onclick="clearData()">🗑️ 데이터 초기화</button>
             <button class="btn btn-success" onclick="exportData()">📥 데이터 내보내기</button>
+            <button class="btn" style="background: #8b5cf6; color: white;" onclick="generateSampleData()">🧪 샘플 데이터 생성</button>
         </div>
 
         <div class="stats-grid">
@@ -307,7 +309,18 @@
 
         // 팝업 클릭율 계산
         function calculatePopupClickRate(popupId, clicks) {
-            const opens = clicks.filter(click => click.action === 'open').length;
+            // clicks가 배열인지 확인하고, 아니면 빈 배열로 처리
+            if (!Array.isArray(clicks)) {
+                console.warn(`팝업 ${popupId}의 클릭 데이터가 배열이 아닙니다:`, clicks);
+                return {
+                    popupId,
+                    totalOpens: 0,
+                    totalInteractions: 0,
+                    clickRate: '0%'
+                };
+            }
+            
+            const opens = clicks.filter(click => click && click.action === 'open').length;
             const totalInteractions = clicks.length;
             const clickRate = opens > 0 ? (totalInteractions / opens * 100).toFixed(2) + '%' : '0%';
             
@@ -321,7 +334,20 @@
 
         // 광고비 대비 수익률 계산
         function calculateAdROI(adId, revenues, adCost = 10000) {
-            const totalRevenue = revenues.reduce((sum, rev) => sum + rev.revenue, 0);
+            // revenues가 배열인지 확인하고, 아니면 빈 배열로 처리
+            if (!Array.isArray(revenues)) {
+                console.warn(`광고 ${adId}의 수익 데이터가 배열이 아닙니다:`, revenues);
+                return {
+                    adId,
+                    totalRevenue: 0,
+                    adCost,
+                    roi: 'N/A'
+                };
+            }
+            
+            const totalRevenue = revenues.reduce((sum, rev) => {
+                return sum + (rev && typeof rev.revenue === 'number' ? rev.revenue : 0);
+            }, 0);
             const roi = adCost > 0 ? ((totalRevenue - adCost) / adCost * 100).toFixed(2) + '%' : 'N/A';
             
             return {
@@ -338,9 +364,20 @@
             
             // 전체 통계 업데이트
             const totalSessions = new Set();
-            const totalConversions = data.conversion || [];
-            const totalPopupClicks = Object.values(data.popup_click || {}).flat();
-            const totalAdRevenue = Object.values(data.ad_revenue || {}).flat().reduce((sum, rev) => sum + rev.revenue, 0);
+            const totalConversions = Array.isArray(data.conversion) ? data.conversion : [];
+            
+            // 팝업 클릭 데이터 안전하게 처리
+            const popupClickData = data.popup_click || {};
+            const totalPopupClicks = Object.values(popupClickData)
+                .filter(clicks => Array.isArray(clicks))
+                .flat();
+            
+            // 광고 수익 데이터 안전하게 처리
+            const adRevenueData = data.ad_revenue || {};
+            const totalAdRevenue = Object.values(adRevenueData)
+                .filter(revenues => Array.isArray(revenues))
+                .flat()
+                .reduce((sum, rev) => sum + (rev && typeof rev.revenue === 'number' ? rev.revenue : 0), 0);
 
             // 세션 수 계산
             totalPopupClicks.forEach(click => totalSessions.add(click.sessionId));
@@ -466,6 +503,96 @@
         function refreshData() {
             updateDashboard();
             alert('데이터가 새로고침되었습니다.');
+        }
+
+        // 테스트용 샘플 데이터 생성
+        function generateSampleData() {
+            const sampleData = {
+                popup_click: {
+                    'hero_cta': [
+                        {
+                            sessionId: 'session_1234567890_abc123',
+                            popupId: 'hero_cta',
+                            popupType: 'cta_button',
+                            action: 'open',
+                            timestamp: new Date(Date.now() - 3600000).toISOString(),
+                            userAgent: navigator.userAgent,
+                            referrer: document.referrer,
+                            url: window.location.href
+                        },
+                        {
+                            sessionId: 'session_1234567890_abc123',
+                            popupId: 'hero_cta',
+                            popupType: 'cta_button',
+                            action: 'interact',
+                            timestamp: new Date(Date.now() - 3500000).toISOString(),
+                            userAgent: navigator.userAgent,
+                            referrer: document.referrer,
+                            url: window.location.href
+                        }
+                    ],
+                    'payment_modal': [
+                        {
+                            sessionId: 'session_1234567890_abc123',
+                            popupId: 'payment_modal',
+                            popupType: 'modal_popup',
+                            action: 'open',
+                            timestamp: new Date(Date.now() - 1800000).toISOString(),
+                            userAgent: navigator.userAgent,
+                            referrer: document.referrer,
+                            url: window.location.href
+                        }
+                    ]
+                },
+                ad_revenue: {
+                    'payment_conversion': [
+                        {
+                            sessionId: 'session_1234567890_abc123',
+                            adId: 'payment_conversion',
+                            adType: 'conversion',
+                            revenue: 6900,
+                            currency: 'KRW',
+                            timestamp: new Date(Date.now() - 900000).toISOString(),
+                            userAgent: navigator.userAgent,
+                            referrer: document.referrer,
+                            url: window.location.href
+                        }
+                    ]
+                },
+                conversion: [
+                    {
+                        sessionId: 'session_1234567890_abc123',
+                        eventType: 'form_submitted',
+                        eventValue: 'payment_modal',
+                        metadata: {
+                            propertyType: '아파트',
+                            depositAmount: 100000000
+                        },
+                        timestamp: new Date(Date.now() - 1800000).toISOString(),
+                        userAgent: navigator.userAgent,
+                        referrer: document.referrer,
+                        url: window.location.href
+                    },
+                    {
+                        sessionId: 'session_1234567890_abc123',
+                        eventType: 'payment_completed',
+                        eventValue: 6900,
+                        metadata: {
+                            propertyType: '아파트',
+                            residenceStatus: '거주자',
+                            amount: 6900
+                        },
+                        timestamp: new Date(Date.now() - 900000).toISOString(),
+                        userAgent: navigator.userAgent,
+                        referrer: document.referrer,
+                        url: window.location.href
+                    }
+                ]
+            };
+            
+            localStorage.setItem('tracking_data', JSON.stringify(sampleData));
+            updateDashboard();
+            alert('샘플 데이터가 생성되었습니다!');
         }
 
         // 데이터 초기화
