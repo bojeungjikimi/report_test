@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>보증지킴이 - 전세 사기 방지 서비스</title>
-    <link rel="stylesheet" href="css/index-styles.css">
+    <link rel="stylesheet" href="index.css">
     <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     
@@ -32,7 +32,7 @@
         <div class="container">
             <div class="top-bar-content">
                 <div class="logo">
-                    <img src="images/logo.png" alt="보증지킴이" class="logo-img">
+    <img src="../images/logo.png" alt="보증지킴이" class="logo-img">
                     <span class="logo-text">보증지킴이</span>
                 </div>
                 <div class="top-bar-actions">
@@ -969,7 +969,7 @@
                         </button>
                     </div>
                     <!-- Navigation -->
-                    <div class="modal-navigation">
+                <div class="modal-navigation">
                         <button class="nav-btn prev" onclick="goToPreviousStep()" id="prevBtn" disabled>이전</button>
                         <button class="nav-btn next" onclick="goToNextStep()" id="nextBtn">보고서 신청하기</button>
                     </div>
@@ -1151,7 +1151,7 @@
                     <div class="fraud-stats-section" style="margin: 1rem auto; max-width: 300px; width: 100%;">
                         <div class="fraud-stats-card" id="fraudStatsCard">
                             <div class="stats-header">
-                                <div class="stats-location" id="statsLocation">서울시 강남구</div>
+                                <div class="stats-location" id="statsLocation">서울특별시 강남구</div>
                                 <div class="stats-year">2025년 기준</div>
                             </div>
                             <div class="stats-content">
@@ -1587,48 +1587,48 @@
 
         // 지역별 전세사기 통계 데이터
         const fraudStatsData = {
-            '서울시 강남구': { count: 12, amount: '3억 2천만원', risk: '보통' },
-            '서울시 서초구': { count: 8, amount: '2억 1천만원', risk: '낮음' },
-            '서울시 송파구': { count: 15, amount: '4억 5천만원', risk: '높음' },
-            '서울시 강동구': { count: 6, amount: '1억 8천만원', risk: '낮음' },
-            '서울시 마포구': { count: 9, amount: '2억 7천만원', risk: '보통' },
-            '서울시 영등포구': { count: 11, amount: '3억 1천만원', risk: '보통' },
-            '서울시 구로구': { count: 7, amount: '2억 2천만원', risk: '낮음' },
-            '서울시 금천구': { count: 4, amount: '1억 2천만원', risk: '낮음' },
-            '서울시 관악구': { count: 13, amount: '3억 8천만원', risk: '높음' },
-            '서울시 동작구': { count: 8, amount: '2억 3천만원', risk: '보통' },
-            '서울시 서대문구': { count: 5, amount: '1억 5천만원', risk: '낮음' },
-            '서울시 은평구': { count: 6, amount: '1억 9천만원', risk: '낮음' },
-            '서울시 종로구': { count: 3, amount: '9천만원', risk: '낮음' },
-            '서울시 중구': { count: 4, amount: '1억 1천만원', risk: '낮음' },
-            '서울시 용산구': { count: 7, amount: '2억 4천만원', risk: '보통' },
-            '서울시 성동구': { count: 5, amount: '1억 6천만원', risk: '낮음' },
-            '서울시 광진구': { count: 6, amount: '1억 8천만원', risk: '낮음' },
-            '서울시 중랑구': { count: 8, amount: '2억 5천만원', risk: '보통' },
-            '서울시 성북구': { count: 4, amount: '1억 3천만원', risk: '낮음' },
-            '서울시 강북구': { count: 3, amount: '8천만원', risk: '낮음' },
-            '서울시 도봉구': { count: 2, amount: '6천만원', risk: '낮음' },
-            '서울시 노원구': { count: 5, amount: '1억 4천만원', risk: '낮음' },
-            '서울시 양천구': { count: 7, amount: '2억 1천만원', risk: '보통' },
-            '서울시 강서구': { count: 6, amount: '1억 7천만원', risk: '낮음' },
-            '서울시 구로구': { count: 7, amount: '2억 2천만원', risk: '낮음' },
-            '서울시 금천구': { count: 4, amount: '1억 2천만원', risk: '낮음' },
-            '서울시 관악구': { count: 13, amount: '3억 8천만원', risk: '높음' },
-            '서울시 동작구': { count: 8, amount: '2억 3천만원', risk: '보통' },
-            '서울시 서대문구': { count: 5, amount: '1억 5천만원', risk: '낮음' },
-            '서울시 은평구': { count: 6, amount: '1억 9천만원', risk: '낮음' },
-            '서울시 종로구': { count: 3, amount: '9천만원', risk: '낮음' },
-            '서울시 중구': { count: 4, amount: '1억 1천만원', risk: '낮음' },
-            '서울시 용산구': { count: 7, amount: '2억 4천만원', risk: '보통' },
-            '서울시 성동구': { count: 5, amount: '1억 6천만원', risk: '낮음' },
-            '서울시 광진구': { count: 6, amount: '1억 8천만원', risk: '낮음' },
-            '서울시 중랑구': { count: 8, amount: '2억 5천만원', risk: '보통' },
-            '서울시 성북구': { count: 4, amount: '1억 3천만원', risk: '낮음' },
-            '서울시 강북구': { count: 3, amount: '8천만원', risk: '낮음' },
-            '서울시 도봉구': { count: 2, amount: '6천만원', risk: '낮음' },
-            '서울시 노원구': { count: 5, amount: '1억 4천만원', risk: '낮음' },
-            '서울시 양천구': { count: 7, amount: '2억 1천만원', risk: '보통' },
-            '서울시 강서구': { count: 6, amount: '1억 7천만원', risk: '낮음' },
+            '서울특별시 강남구': { count: 12, amount: '3억 2천만원', risk: '보통' },
+            '서울특별시 서초구': { count: 8, amount: '2억 1천만원', risk: '낮음' },
+            '서울특별시 송파구': { count: 15, amount: '4억 5천만원', risk: '높음' },
+            '서울특별시 강동구': { count: 6, amount: '1억 8천만원', risk: '낮음' },
+            '서울특별시 마포구': { count: 9, amount: '2억 7천만원', risk: '보통' },
+            '서울특별시 영등포구': { count: 11, amount: '3억 1천만원', risk: '보통' },
+            '서울특별시 구로구': { count: 7, amount: '2억 2천만원', risk: '낮음' },
+            '서울특별시 금천구': { count: 4, amount: '1억 2천만원', risk: '낮음' },
+            '서울특별시 관악구': { count: 13, amount: '3억 8천만원', risk: '높음' },
+            '서울특별시 동작구': { count: 8, amount: '2억 3천만원', risk: '보통' },
+            '서울특별시 서대문구': { count: 5, amount: '1억 5천만원', risk: '낮음' },
+            '서울특별시 은평구': { count: 6, amount: '1억 9천만원', risk: '낮음' },
+            '서울특별시 종로구': { count: 3, amount: '9천만원', risk: '낮음' },
+            '서울특별시 중구': { count: 4, amount: '1억 1천만원', risk: '낮음' },
+            '서울특별시 용산구': { count: 7, amount: '2억 4천만원', risk: '보통' },
+            '서울특별시 성동구': { count: 5, amount: '1억 6천만원', risk: '낮음' },
+            '서울특별시 광진구': { count: 6, amount: '1억 8천만원', risk: '낮음' },
+            '서울특별시 중랑구': { count: 8, amount: '2억 5천만원', risk: '보통' },
+            '서울특별시 성북구': { count: 4, amount: '1억 3천만원', risk: '낮음' },
+            '서울특별시 강북구': { count: 3, amount: '8천만원', risk: '낮음' },
+            '서울특별시 도봉구': { count: 2, amount: '6천만원', risk: '낮음' },
+            '서울특별시 노원구': { count: 5, amount: '1억 4천만원', risk: '낮음' },
+            '서울특별시 양천구': { count: 7, amount: '2억 1천만원', risk: '보통' },
+            '서울특별시 강서구': { count: 6, amount: '1억 7천만원', risk: '낮음' },
+            '서울특별시 구로구': { count: 7, amount: '2억 2천만원', risk: '낮음' },
+            '서울특별시 금천구': { count: 4, amount: '1억 2천만원', risk: '낮음' },
+            '서울특별시 관악구': { count: 13, amount: '3억 8천만원', risk: '높음' },
+            '서울특별시 동작구': { count: 8, amount: '2억 3천만원', risk: '보통' },
+            '서울특별시 서대문구': { count: 5, amount: '1억 5천만원', risk: '낮음' },
+            '서울특별시 은평구': { count: 6, amount: '1억 9천만원', risk: '낮음' },
+            '서울특별시 종로구': { count: 3, amount: '9천만원', risk: '낮음' },
+            '서울특별시 중구': { count: 4, amount: '1억 1천만원', risk: '낮음' },
+            '서울특별시 용산구': { count: 7, amount: '2억 4천만원', risk: '보통' },
+            '서울특별시 성동구': { count: 5, amount: '1억 6천만원', risk: '낮음' },
+            '서울특별시 광진구': { count: 6, amount: '1억 8천만원', risk: '낮음' },
+            '서울특별시 중랑구': { count: 8, amount: '2억 5천만원', risk: '보통' },
+            '서울특별시 성북구': { count: 4, amount: '1억 3천만원', risk: '낮음' },
+            '서울특별시 강북구': { count: 3, amount: '8천만원', risk: '낮음' },
+            '서울특별시 도봉구': { count: 2, amount: '6천만원', risk: '낮음' },
+            '서울특별시 노원구': { count: 5, amount: '1억 4천만원', risk: '낮음' },
+            '서울특별시 양천구': { count: 7, amount: '2억 1천만원', risk: '보통' },
+            '서울특별시 강서구': { count: 6, amount: '1억 7천만원', risk: '낮음' },
             '경기도 성남시': { count: 9, amount: '2억 6천만원', risk: '보통' },
             '경기도 수원시': { count: 11, amount: '3억 2천만원', risk: '보통' },
             '경기도 고양시': { count: 7, amount: '2억 1천만원', risk: '보통' },
@@ -1689,6 +1689,7 @@
             if (modal) {
                 modal.classList.add('show');
             document.body.style.overflow = 'hidden';
+                document.body.classList.add('modal-open');
                 resetModal();
                 // 모달 열기 추적
                 trackPopupClick('payment_modal', 'modal_popup', 'open');
@@ -1700,6 +1701,7 @@
             if (modal) {
                 modal.classList.remove('show');
                 document.body.style.overflow = 'auto';
+                document.body.classList.remove('modal-open');
                 // 모달 닫기 추적
                 trackPopupClick('payment_modal', 'modal_popup', 'close');
             }
@@ -2993,7 +2995,8 @@
                 const response = await emailjs.send(
                     EMAILJS_CONFIG.serviceId,
                     EMAILJS_CONFIG.templateId,
-                    templateParams
+                    templateParams,
+                    EMAILJS_CONFIG.publicKey
                 );
 
                 console.log('✅ 이메일 전송 성공:', response);
